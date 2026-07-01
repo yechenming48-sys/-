@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赛博周易 · 全息天机占卜台</title>
+    <meta name="description" content="赛博周易占卜系统。融合东方玄学水墨与科幻霓虹，提供画符仪式、爻线推演及AI解卦。">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 背景粒子与 3D 网格/球体画布 -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- 顶部 HUD 导航栏 -->
+    <header class="top-hud">
+        <a href="../index.html" class="back-home-btn" title="返回玄机阁主页">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            玄机阁
+        </a>
+        <div class="hud-logo">易 · 经 · 占 · 卜</div>
+        <nav class="hud-nav">
+            <span class="nav-item active" onclick="location.reload()">起卦</span>
+            <span class="nav-item">问事</span>
+            <span class="nav-item">常见问题</span>
+        </nav>
+        <div>
+            <button id="audio-toggle-btn" class="audio-toggle">🔊 开启法界</button>
+        </div>
+    </header>
+
+    <!-- 主界面容器 -->
+    <main>
+
+        <!-- SCREEN 1: 开启仪式 (主界面) -->
+        <section id="screen-intro" class="screen active">
+            <!-- 左侧边 HUD 诊断终端 -->
+            <div class="intro-hud-left">
+                <div class="hud-bar-vertical">
+                    <span class="hud-char">天</span>
+                    <span class="hud-char">行</span>
+                    <span class="hud-char">健</span>
+                    <span class="hud-dot">▪</span>
+                    <span class="hud-char">君</span>
+                    <span class="hud-char">子</span>
+                    <span class="hud-char">以</span>
+                    <span class="hud-char">自</span>
+                    <span class="hud-char">强</span>
+                    <span class="hud-char">不</span>
+                    <span class="hud-char">息</span>
+                </div>
+            </div>
+
+            <!-- 右侧边 HUD 诊断终端 -->
+            <div class="intro-hud-right">
+                <div class="hud-bar-vertical">
+                    <span class="hud-char">地</span>
+                    <span class="hud-char">势</span>
+                    <span class="hud-char">坤</span>
+                    <span class="hud-dot">▪</span>
+                    <span class="hud-char">君</span>
+                    <span class="hud-char">子</span>
+                    <span class="hud-char">以</span>
+                    <span class="hud-char">厚</span>
+                    <span class="hud-char">德</span>
+                    <span class="hud-char">载</span>
+                    <span class="hud-char">物</span>
+                </div>
+            </div>
+
+            <div class="intro-container">
+                <!-- 核心太极旋转轮 (高科技 SVG 反应堆版) -->
+                <div class="bagua-wheel-container" id="taiji-core-btn">
+                    <svg class="taiji-svg-core" viewBox="0 0 200 200">
+                        <!-- 外层刻度圈 -->
+                        <circle class="core-outer-ring" cx="100" cy="100" r="92" fill="none" stroke="rgba(88, 232, 204, 0.25)" stroke-width="1" stroke-dasharray="6,4" />
+                        <circle class="core-middle-ring" cx="100" cy="100" r="85" fill="none" stroke="rgba(243, 166, 59, 0.2)" stroke-width="1.5" />
+                        
+                        <!-- 旋转的太极双鱼图 -->
+                        <g class="taiji-fishes">
+                            <!-- 黑色/阴鱼 -->
+                            <path d="M 100 15 A 42.5 42.5 0 0 0 100 100 A 42.5 42.5 0 0 1 100 185 A 85 85 0 0 0 100 15 Z" fill="rgba(88, 232, 204, 0.15)" stroke="rgba(88, 232, 204, 0.8)" stroke-width="2" />
+                            <!-- 白色/阳鱼 -->
+                            <path d="M 100 15 A 85 85 0 0 1 100 185 A 42.5 42.5 0 0 0 100 100 A 42.5 42.5 0 0 1 100 15 Z" fill="rgba(243, 166, 59, 0.15)" stroke="rgba(243, 166, 59, 0.8)" stroke-width="2" />
+                            
+                            <!-- 阴中之阳眼 (金黄) -->
+                            <circle cx="100" cy="57.5" r="9" fill="var(--neon-gold)" class="pulse-eye-gold" />
+                            <!-- 阳中之阴眼 (青绿) -->
+                            <circle cx="100" cy="142.5" r="9" fill="var(--neon-blue)" class="pulse-eye-blue" />
+                        </g>
+                    </svg>
+                </div>
+                
+                <h1 class="system-title">CYBER <span class="title-separator">☯</span> 周易</h1>
+                <div class="system-tag">六十四卦 · 全息占卜</div>
+                <p class="system-subtitle">赛博纪元 · 古老智慧的数字回响。在0与1之间，寻找天地的启示。</p>
+                
+                <div class="intro-buttons">
+                    <!-- 主按钮：启动占卜 -->
+                    <button id="btn-enter" class="btn-primary-oracle">
+                        <span class="oracle-btn-corner tl"></span>
+                        <span class="oracle-btn-corner tr"></span>
+                        <span class="oracle-btn-corner bl"></span>
+                        <span class="oracle-btn-corner br"></span>
+                        <span class="oracle-btn-scan"></span>
+                        <span class="oracle-btn-inner">
+                            <span class="oracle-btn-icon">⚡</span>
+                            <span class="oracle-btn-text">启动占卜</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: 凝神画符与问事输入 (信息表单) -->
+        <section id="screen-drawing" class="screen">
+            <div class="form-container">
+                <h2 class="form-main-title">起 卦</h2>
+                <p class="form-main-subtitle">心诚则灵，静心默念你的问题，点击起卦</p>
+
+                <!-- 问事信息卡片 -->
+                <div class="form-card">
+                    
+                    <!-- 1. 问事类别 -->
+                    <div class="form-group">
+                        <label class="form-label">问事类别</label>
+                        <select id="select-category" class="form-select">
+                            <option value="">-- 请选择 --</option>
+                            <option value="career">事业前途</option>
+                            <option value="love">情缘人际</option>
+                            <option value="wealth">财运亨通</option>
+                            <option value="health">身心行止</option>
+                            <option value="general">终生大局</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. 问题输入 -->
+                    <div class="form-group">
+                        <label class="form-label">你的问题或想说的话（可选）</label>
+                        <textarea id="input-question" class="form-textarea" placeholder="可以写下具体想问的事，例如：我今年适合换工作吗？"></textarea>
+                    </div>
+
+                    <!-- 3. 画符板 -->
+                    <div class="talisman-section">
+                        <div class="talisman-header">
+                            <span class="talisman-title">✦ 画符请愿</span>
+                            <div class="brush-options">
+                                <div class="brush-color-btn" data-color="cyan" style="background: #00f0ff;"></div>
+                                <div class="brush-color-btn active" data-color="pink" style="background: #ff3c00;"></div>
+                                <div class="brush-color-btn" data-color="gold" style="background: #ffd700;"></div>
+                            </div>
+                            <span class="talisman-subtitle">摹画符咒 · 以诚感天</span>
+                        </div>
+                        
+                        <div class="talisman-board">
+                            <!-- 画布 -->
+                            <div class="canvas-wrapper">
+                                <canvas id="drawing-canvas"></canvas>
+                                <div id="canvas-hint" class="canvas-hint-overlay">
+                                    <div class="canvas-hint-text">泼墨绘符</div>
+                                </div>
+                            </div>
+                            
+                            <!-- 符咒参考示例 -->
+                            <div class="talisman-reference">
+                                <svg class="ref-talisman-svg" viewBox="0 0 100 150">
+                                    <path d="M 50 10 L 50 140 M 35 30 L 65 30 M 40 45 L 60 45 M 25 60 C 50 40, 50 80, 75 60 C 50 80, 50 110, 50 140 M 30 110 L 70 110" fill="none" stroke="rgba(255, 60, 0, 0.45)" stroke-width="2.5" />
+                                </svg>
+                                <span class="ref-talisman-label">镇天符</span>
+                            </div>
+                        </div>
+
+                        <!-- 画布操作按钮 -->
+                        <div class="talisman-buttons">
+                            <button id="btn-clear" class="talisman-btn-clear">✕ 清除</button>
+                            <button id="btn-confirm-drawing" class="talisman-btn-confirm">✓ 符成</button>
+                        </div>
+                    </div>
+
+                    <!-- 4. 底部起卦主按钮 -->
+                    <button id="btn-cast-init" class="btn-main-cast">☯ 起 卦</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: 乾坤起卦 (掷币仪式) -->
+        <section id="screen-divination" class="screen">
+            <div class="casting-wrapper">
+                <!-- 左侧：投币器 -->
+                <div class="coins-container">
+                    <div class="hud-title" style="margin-bottom: 10px;">[ 乾坤抛币阵 ]</div>
+                    
+                    <div class="coins-row">
+                        <!-- 硬币 1 -->
+                        <div class="coin" id="coin-1">
+                            <div class="coin-side coin-front">
+                                <div class="coin-inner-square"></div>
+                                乾
+                            </div>
+                            <div class="coin-side coin-back">
+                                <div class="coin-inner-square"></div>
+                                坤
+                            </div>
+                        </div>
+                        <!-- 硬币 2 -->
+                        <div class="coin" id="coin-2">
+                            <div class="coin-side coin-front">
+                                <div class="coin-inner-square"></div>
+                                乾
+                            </div>
+                            <div class="coin-side coin-back">
+                                <div class="coin-inner-square"></div>
+                                坤
+                            </div>
+                        </div>
+                        <!-- 硬币 3 -->
+                        <div class="coin" id="coin-3">
+                            <div class="coin-side coin-front">
+                                <div class="coin-inner-square"></div>
+                                乾
+                            </div>
+                            <div class="coin-side coin-back">
+                                <div class="coin-inner-square"></div>
+                                坤
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cast-count-indicator">
+                        已推演卦象：<span id="cast-count" style="color: var(--neon-blue); font-weight: bold;">0</span> / 6 爻
+                    </div>
+
+                    <button id="btn-cast-coin" class="btn-cyber" style="width: 100%; max-width: 320px;">投掷铜钱（寻爻）</button>
+                </div>
+
+                <!-- 右侧：六爻生成显示器 -->
+                <div class="hexagram-hud">
+                    <div class="hexagram-hud-title">天机爻位</div>
+                    <div id="yao-lines" class="yao-lines-list">
+                        <!-- 六爻线由下至上生成 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 4: 赛博解卦 (结果报告) -->
+        <section id="screen-result" class="screen">
+            <div class="result-wrapper">
+                <!-- 左侧：结缘卡片 -->
+                <div class="result-card-container">
+                    <div class="card-header">
+                        <div class="card-title-sec">
+                            <div id="card-hex-name" class="card-hex-name">乾为天</div>
+                            <div id="card-hex-cyber" class="card-hex-cyber">天枢协议 · 无限算力</div>
+                        </div>
+                        <div id="card-hex-symbol" class="card-hex-symbol">䷀</div>
+                    </div>
+                    
+                    <!-- 卡片中间的六爻图 -->
+                    <div id="card-lines" class="card-body-lines">
+                        <!-- 六爻复制至此 -->
+                    </div>
+
+                    <div id="card-judgment" class="card-judgment">
+                        卦辞：<span id="card-judgment-text">元亨利贞。</span>
+                    </div>
+
+                    <div class="card-footer">
+                        <span>天机已锁 // SECURE HASH</span>
+                        <span>赛博天机台结缘</span>
+                    </div>
+                </div>
+
+                <!-- 右侧：AI 终端屏幕 -->
+                <div class="result-ai-console">
+                    <div class="console-header">
+                        <span>TERMINAL: AI_ORACLE_DECRYPTOR</span>
+                        <div class="console-dots">
+                            <span class="console-dot"></span>
+                            <span class="console-dot"></span>
+                            <span class="console-dot"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="console-body" id="console-text-body">
+                        <!-- AI打字机逐字输出 -->
+                    </div>
+
+                    <div class="console-footer">
+                        <button id="btn-restart" class="btn-secondary">再次占卜 (重置)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 顺序加载JS逻辑模块 -->
+    <script src="iching.js"></script>
+    <script src="particles.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
