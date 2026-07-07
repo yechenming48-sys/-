@@ -57,34 +57,6 @@ body::after {
     pointer-events: auto; /* Particle canvas handles mouse movement */
 }
 
-/* Back-home button */
-.back-home-btn {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    z-index: 100;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.back-home-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: var(--glow-accent);
-    transform: translateX(-3px);
-}
-
 /* Audio control styling */
 .audio-control {
     position: fixed;

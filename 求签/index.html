@@ -12,12 +12,14 @@
   
   <link rel="stylesheet" href="../assets/shared-ui.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../assets/atmosphere.css">
+  <link rel="stylesheet" href="../assets/themes.css">
 </head>
-<body>
+<body class="theme-ziwei">
 
   <!-- 星空背景画布 -->
   <canvas id="starfield"></canvas>
-  
+  <div id="page-spotlight" aria-hidden="true"></div>
   <!-- 顶部导航栏 -->
   <header>
     <div class="header-logo-row">
@@ -82,11 +84,18 @@
           </svg>
         </div>
         
+        <div class="page-kicker"><span class="dot"></span> IMPERIAL STAR CHART</div>
         <h1 class="hero-title font-serif">紫微天枢</h1>
         <p class="hero-subtitle">洞察星盘奥秘 ✦ 解读宿命轨迹</p>
         <p class="hero-desc">
           紫微斗数是中华传统的星命学之首，以出生时间排定乾坤十二宫，分布诸星曜，推算人一生的性格、财运、事业、婚姻及健康。我们为您提供现代美学设计的排盘工具，以及系统科学的学习课堂。
         </p>
+
+        <div class="feature-chips">
+          <span class="feature-chip">十二宫位</span>
+          <span class="feature-chip">精准排盘</span>
+          <span class="feature-chip">斗数课堂</span>
+        </div>
         
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="switchTab('calc-view')">
@@ -598,6 +607,7 @@
 
 
   <!-- 引入逻辑脚本 -->
+  <script src="../assets/atmosphere.js"></script>
   <script src="lunar.js"></script>
   <script src="interpretations.js"></script>
   <script src="app.js"></script>

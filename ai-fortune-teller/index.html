@@ -12,11 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/shared-ui.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/atmosphere.css">
+    <link rel="stylesheet" href="../assets/themes.css">
 </head>
-<body>
+<body class="theme-oracle">
     <!-- Background Canvas for Particles -->
     <canvas id="particle-canvas"></canvas>
-    
+    <div id="page-spotlight" aria-hidden="true"></div>
     <!-- Back to Home -->
     <a href="../index.html" class="back-home-btn" title="返回玄机阁主页">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -97,6 +99,7 @@
 
                 <!-- Glassmorphic Landing Card -->
                 <div class="landing-glass-card fade-in-up">
+                    <div class="page-kicker"><span class="dot"></span> COSMIC ORACLE RITUAL</div>
                     <h1 class="mystic-title">星轨神谕</h1>
                     
                     <!-- Decorative separator -->
@@ -110,6 +113,11 @@
                     <div class="mystic-desc">
                         基于星相物理量子偏振模拟，解译您此生与群星交汇的引力波。<br>
                         让古老占星密钥与 AI 智慧为您拨开命运的重重迷雾。
+                    </div>
+                    <div class="feature-chips">
+                        <span class="feature-chip">星盘契约</span>
+                        <span class="feature-chip">塔罗镜像</span>
+                        <span class="feature-chip">AI 神谕</span>
                     </div>
                     <button class="btn btn-mystic animate-pulse" id="btn-enter">
                         <span>开启命运之门</span>
@@ -433,6 +441,7 @@
     <!-- Background music loader (Mystical cosmic pad/ambient loop) -->
     <audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
 
+    <script src="../assets/atmosphere.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
 </body>

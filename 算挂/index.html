@@ -7,11 +7,14 @@
     <meta name="description" content="赛博周易占卜系统。融合东方玄学水墨与科幻霓虹，提供画符仪式、爻线推演及AI解卦。">
     <link rel="stylesheet" href="../assets/shared-ui.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/atmosphere.css">
+    <link rel="stylesheet" href="../assets/themes.css">
 </head>
-<body>
+<body class="theme-iching">
 
     <!-- 背景粒子与 3D 网格/球体画布 -->
     <canvas id="particle-canvas"></canvas>
+    <div id="page-spotlight" aria-hidden="true"></div>
 
     <!-- 顶部 HUD 导航栏 -->
     <header class="top-hud">
@@ -92,9 +95,16 @@
                     </svg>
                 </div>
                 
+                <div class="page-kicker"><span class="dot"></span> CYBER DIVINATION CORE</div>
                 <h1 class="system-title">CYBER <span class="title-separator">☯</span> 周易</h1>
                 <div class="system-tag">六十四卦 · 全息占卜</div>
                 <p class="system-subtitle">赛博纪元 · 古老智慧的数字回响。在0与1之间，寻找天地的启示。</p>
+
+                <div class="feature-chips">
+                    <span class="feature-chip">画符仪式</span>
+                    <span class="feature-chip">六爻起卦</span>
+                    <span class="feature-chip">AI 解卦</span>
+                </div>
                 
                 <div class="intro-buttons">
                     <!-- 主按钮：启动占卜 -->
@@ -297,6 +307,7 @@
     </main>
 
     <!-- 顺序加载JS逻辑模块 -->
+    <script src="../assets/atmosphere.js"></script>
     <script src="iching.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>

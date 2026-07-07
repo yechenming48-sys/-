@@ -1,0 +1,241 @@
+/* ============================================================
+   星轨神谕
+   ============================================================ */
+body.theme-oracle::before {
+    content: '';
+    position: fixed;
+    inset: -15%;
+    background:
+        radial-gradient(circle at 20% 18%, rgba(255, 94, 200, 0.14), transparent 28%),
+        radial-gradient(circle at 78% 22%, rgba(77, 232, 255, 0.12), transparent 30%),
+        radial-gradient(circle at 50% 82%, rgba(115, 3, 192, 0.12), transparent 32%);
+    filter: blur(24px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body.theme-oracle .page-kicker {
+    border: 1px solid rgba(255, 94, 200, 0.2);
+    background: rgba(255, 94, 200, 0.06);
+    color: rgba(253, 239, 249, 0.72);
+}
+
+body.theme-oracle .page-kicker .dot {
+    background: #ff5ec8;
+    box-shadow: 0 0 12px #ff5ec8;
+}
+
+body.theme-oracle .landing-glass-card,
+body.theme-oracle .glass-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(16, 8, 48, 0.82), rgba(8, 4, 28, 0.68));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.theme-oracle .mystic-title {
+    background-size: 220% auto;
+    filter: drop-shadow(0 0 28px rgba(236, 56, 188, 0.22));
+}
+
+body.theme-oracle .mystic-stargate {
+    filter: drop-shadow(0 0 30px rgba(0, 242, 254, 0.15));
+}
+
+body.theme-oracle .audio-control {
+    border-radius: 999px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-oracle .focus-option.active,
+body.theme-oracle .btn-primary {
+    box-shadow: 0 0 24px rgba(236, 56, 188, 0.22);
+}
+
+body.theme-oracle .result-card.glass-card {
+    border-color: rgba(0, 242, 254, 0.12);
+}
+
+body.theme-oracle .feature-chip {
+    border-color: rgba(0, 242, 254, 0.18);
+}
+
+/* ============================================================
+   紫微天枢
+   ============================================================ */
+body.theme-ziwei::before {
+    content: '';
+    position: fixed;
+    inset: -15%;
+    background:
+        radial-gradient(circle at 18% 20%, rgba(255, 224, 130, 0.12), transparent 28%),
+        radial-gradient(circle at 82% 16%, rgba(0, 229, 255, 0.1), transparent 30%),
+        radial-gradient(circle at 48% 84%, rgba(146, 84, 222, 0.1), transparent 32%);
+    filter: blur(24px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body.theme-ziwei header {
+    width: min(1180px, calc(100% - 2rem));
+    margin: 1rem auto 0;
+    padding: 0.85rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    background: rgba(10, 6, 24, 0.72);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-ziwei .page-kicker {
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    background: rgba(212, 175, 55, 0.06);
+    color: rgba(255, 224, 130, 0.8);
+}
+
+body.theme-ziwei .page-kicker .dot {
+    background: #ffe082;
+    box-shadow: 0 0 12px #ffe082;
+}
+
+body.theme-ziwei .hero-title {
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    filter: drop-shadow(0 0 24px rgba(212, 175, 55, 0.22));
+}
+
+body.theme-ziwei .zodiac-circle-wrapper {
+    opacity: 0.28;
+}
+
+body.theme-ziwei .glass-panel,
+body.theme-ziwei .pact-form-box {
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.16);
+    background: linear-gradient(180deg, rgba(22, 12, 45, 0.82), rgba(10, 6, 24, 0.72));
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+body.theme-ziwei .feature-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+body.theme-ziwei .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 224, 130, 0.08), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+body.theme-ziwei .feature-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 18px 50px rgba(212, 175, 55, 0.12);
+}
+
+body.theme-ziwei .feature-card:hover::before {
+    opacity: 1;
+}
+
+body.theme-ziwei .btn-primary {
+    border-radius: 999px;
+    box-shadow: 0 10px 28px rgba(212, 175, 55, 0.22);
+}
+
+body.theme-ziwei .btn-secondary {
+    border-radius: 999px;
+}
+
+body.theme-ziwei .feature-chip {
+    border-color: rgba(212, 175, 55, 0.2);
+    color: rgba(255, 224, 130, 0.78);
+}
+
+body.theme-ziwei .view-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================
+   赛博周易
+   ============================================================ */
+body.theme-iching::before {
+    content: '';
+    position: fixed;
+    inset: -15%;
+    background:
+        radial-gradient(circle at 16% 22%, rgba(88, 245, 184, 0.1), transparent 28%),
+        radial-gradient(circle at 84% 18%, rgba(255, 60, 0, 0.08), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(243, 166, 59, 0.08), transparent 32%);
+    filter: blur(24px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body.theme-iching .top-hud {
+    width: min(1180px, calc(100% - 2rem));
+    left: 50%;
+    transform: translateX(-50%);
+    top: 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(88, 232, 204, 0.14);
+    background: rgba(4, 5, 8, 0.62);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.32);
+}
+
+body.theme-iching .page-kicker {
+    border: 1px solid rgba(88, 232, 204, 0.18);
+    background: rgba(88, 232, 204, 0.05);
+    color: rgba(203, 213, 225, 0.78);
+}
+
+body.theme-iching .page-kicker .dot {
+    background: #58e8cc;
+    box-shadow: 0 0 12px #58e8cc;
+}
+
+body.theme-iching .system-title {
+    background-size: 220% auto;
+    animation: shine-iching 8s linear infinite, floatTitle 4s ease-in-out infinite;
+}
+
+@keyframes shine-iching {
+    to { background-position: 200% center; }
+}
+
+body.theme-iching .form-card,
+body.theme-iching .coins-container,
+body.theme-iching .hexagram-hud,
+body.theme-iching .result-card-container,
+body.theme-iching .result-ai-console {
+    border-radius: 18px;
+    border-color: rgba(88, 232, 204, 0.16);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+body.theme-iching .feature-chip {
+    border-color: rgba(88, 232, 204, 0.18);
+    color: rgba(203, 213, 225, 0.75);
+}
+
+body.theme-iching .btn-primary-oracle {
+    animation: oraclePulse 3s ease-in-out infinite, shine-iching 6s linear infinite;
+}
+
+@media (max-width: 768px) {
+    body.theme-ziwei header,
+    body.theme-iching .top-hud {
+        width: calc(100% - 1.2rem);
+        border-radius: 22px;
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 0.85rem;
+    }
+
+    body.theme-ziwei header nav {
+        gap: 1rem;
+    }
+}

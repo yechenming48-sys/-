@@ -81,32 +81,6 @@ body::before {
     border-bottom: 1px solid rgba(88, 232, 204, 0.08);
 }
 
-/* Back-home button */
-.back-home-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 16px;
-    background: rgba(88, 232, 204, 0.06);
-    border: 1px solid rgba(88, 232, 204, 0.2);
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    font-family: 'Cinzel', serif;
-    transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.back-home-btn:hover {
-    border-color: var(--neon-blue);
-    color: var(--neon-blue);
-    box-shadow: 0 0 12px rgba(88,232,204,0.35);
-    transform: translateX(-4px);
-}
-
 .hud-logo {
     font-family: 'Cinzel', 'Noto Serif SC', serif;
     font-weight: 700;
