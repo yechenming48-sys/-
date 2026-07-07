@@ -1446,9 +1446,9 @@ body.theme-iching #screen-result {
 
     /* 3. 画符与问事 (Screen 2) 手机适配 */
     .form-container {
-        margin-top: 70px;
-        width: 95%;
-        padding: 0 10px;
+        margin-top: 0;
+        width: 100%;
+        padding: 0;
     }
     
     .form-main-title {
@@ -1505,10 +1505,10 @@ body.theme-iching #screen-result {
     /* 4. 起卦投币 (Screen 3) 手机适配 */
     .casting-wrapper {
         flex-direction: column;
-        padding-top: 70px;
+        padding-top: 0;
         gap: 25px;
-        overflow-y: auto;
-        height: calc(100vh - 70px);
+        overflow-y: visible;
+        height: auto;
         justify-content: flex-start;
     }
     
@@ -1571,10 +1571,11 @@ body.theme-iching #screen-result {
 
     .result-wrapper {
         flex-direction: column;
-        padding-top: 70px;
+        padding-top: 0;
         gap: 25px;
-        height: calc(100vh - 70px);
-        overflow-y: auto;
+        height: auto;
+        max-height: none;
+        overflow-y: visible;
     }
     
     .result-card-container, .result-ai-console {

@@ -75,6 +75,43 @@ body.theme-iching .premium-frame::before {
     z-index: 1;
 }
 
+body.theme-iching .intro-glass-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 0%, rgba(88, 232, 204, 0.08), transparent 55%);
+    pointer-events: none;
+}
+
+body.theme-iching .intro-glass-shell {
+    animation: iching-shell-glow 7s ease-in-out infinite alternate;
+}
+
+@keyframes iching-shell-glow {
+    from {
+        box-shadow:
+            0 30px 90px rgba(0, 0, 0, 0.55),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 0 50px rgba(88, 232, 204, 0.05);
+    }
+    to {
+        box-shadow:
+            0 30px 90px rgba(0, 0, 0, 0.55),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 0 80px rgba(243, 166, 59, 0.1);
+    }
+}
+
+body.theme-oracle .landing-glass-card {
+    animation: oracle-card-glow 8s ease-in-out infinite alternate;
+}
+
+@keyframes oracle-card-glow {
+    from { box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55), 0 0 40px rgba(236, 56, 188, 0.06); }
+    to { box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55), 0 0 70px rgba(0, 242, 254, 0.1); }
+}
+
 /* ── 星轨神谕 ── */
 body.theme-oracle .landing-glass-card {
     position: relative;
@@ -431,13 +468,336 @@ body.theme-iching .audio-toggle:hover {
     transform: translateX(120%);
 }
 
+/* ============================================================
+   Mobile polish + safe areas
+   ============================================================ */
+:root {
+    --mobile-touch-min: 48px;
+    --mobile-page-pad: max(14px, env(safe-area-inset-left));
+}
+
+/* ── 星轨神谕 mobile ── */
 @media (max-width: 768px) {
+    body.theme-oracle .app-container {
+        padding:
+            max(12px, env(safe-area-inset-top))
+            var(--mobile-page-pad)
+            max(20px, env(safe-area-inset-bottom));
+    }
+
+    body.theme-oracle .screen.active {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    body.theme-oracle .mystic-stargate {
+        width: min(200px, 52vw);
+        height: min(200px, 52vw);
+        margin-bottom: 0.5rem;
+    }
+
+    body.theme-oracle .landing-glass-card {
+        padding: 1.5rem 1.15rem;
+        border-radius: 22px;
+        max-width: 100%;
+    }
+
+    body.theme-oracle .mystic-desc {
+        font-size: 0.88rem;
+        line-height: 1.75;
+        margin-bottom: 1.5rem;
+    }
+
+    body.theme-oracle .feature-chips {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.45rem;
+    }
+
+    body.theme-oracle .btn-mystic,
+    body.theme-oracle .btn-primary,
+    body.theme-oracle .btn-secondary {
+        min-height: var(--mobile-touch-min);
+        width: 100%;
+        max-width: 320px;
+    }
+
+    body.theme-oracle .focus-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.55rem;
+    }
+
+    body.theme-oracle .focus-option {
+        min-height: 72px;
+        padding: 0.65rem 0.35rem;
+    }
+
+    body.theme-oracle .focus-option span {
+        font-size: 0.72rem;
+    }
+
+    body.theme-oracle .drawing-canvas-wrapper {
+        width: min(280px, 78vw);
+        height: min(280px, 78vw);
+    }
+
+    body.theme-oracle .results-wrapper {
+        padding: 0;
+    }
+
+    body.theme-oracle .plain-speak-panel {
+        position: sticky;
+        top: 52px;
+        z-index: 15;
+        margin-bottom: 0.65rem;
+    }
+
+    body.theme-oracle .oracle-output-container {
+        max-height: 42vh;
+    }
+
+    body.theme-oracle .tarot-cards-selection {
+        gap: 0.65rem;
+        justify-content: center;
+    }
+
+    body.theme-oracle .tarot-card-container {
+        width: min(108px, 28vw);
+        height: min(186px, 48vw);
+    }
+
+    body.theme-oracle .audio-control {
+        top: max(14px, env(safe-area-inset-top));
+        right: max(14px, env(safe-area-inset-right));
+    }
+
+    body.theme-oracle .premium-frame {
+        border-radius: 18px;
+    }
+
+    body.theme-oracle .premium-frame::after {
+        inset: 8px;
+    }
+}
+
+@media (max-width: 380px) {
+    body.theme-oracle .focus-selector {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    body.theme-oracle .mystic-title {
+        font-size: 1.85rem !important;
+        letter-spacing: 0.12em !important;
+    }
+}
+
+/* ── 赛博周易 mobile ── */
+@media (max-width: 768px) {
+    body.theme-iching .screen {
+        padding:
+            max(68px, calc(58px + env(safe-area-inset-top)))
+            var(--mobile-page-pad)
+            max(24px, env(safe-area-inset-bottom));
+    }
+
     body.theme-iching .intro-glass-shell {
-        padding: 1.75rem 1.25rem 1.5rem;
-        margin: 0 1rem;
+        padding: 1.35rem 1rem 1.15rem;
+        margin: 0;
+        width: 100%;
+        border-radius: 22px;
+    }
+
+    body.theme-iching .system-title {
+        font-size: clamp(1.65rem, 7vw, 2.2rem) !important;
+        letter-spacing: 0.14em !important;
+        flex-wrap: wrap;
+        row-gap: 0.15rem;
+    }
+
+    body.theme-iching .system-subtitle {
+        font-size: 0.8rem;
+        line-height: 1.65;
+        padding: 0 0.25rem;
+    }
+
+    body.theme-iching .feature-chips {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem;
+    }
+
+    body.theme-iching .btn-primary-oracle,
+    body.theme-iching .btn-main-cast,
+    body.theme-iching .btn-cyber,
+    body.theme-iching .btn-secondary,
+    body.theme-iching .console-footer button {
+        min-height: var(--mobile-touch-min);
+    }
+
+    body.theme-iching .intro-buttons {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    body.theme-iching .form-container {
+        width: 100%;
+        margin-top: 0;
+        padding: 0;
+    }
+
+    body.theme-iching .form-card {
+        padding: 1.15rem;
+        border-radius: 16px;
+    }
+
+    body.theme-iching .form-select,
+    body.theme-iching .form-textarea {
+        font-size: 16px;
+        min-height: 44px;
+    }
+
+    body.theme-iching .form-textarea {
+        min-height: 96px;
+    }
+
+    body.theme-iching .canvas-wrapper {
+        height: min(200px, 42vw);
+        min-height: 180px;
+        border-radius: 12px;
+    }
+
+    body.theme-iching .talisman-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+    }
+
+    body.theme-iching .talisman-btn-clear,
+    body.theme-iching .talisman-btn-confirm {
+        min-height: 44px;
+    }
+
+    body.theme-iching .btn-main-cast {
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.95rem;
+    }
+
+    body.theme-iching #screen-divination {
+        padding-top: max(72px, calc(60px + env(safe-area-inset-top)));
+    }
+
+    body.theme-iching .casting-wrapper {
+        width: 100%;
+        padding-top: 0;
+        height: auto;
+        min-height: 0;
+        gap: 1rem;
+    }
+
+    body.theme-iching .coins-container,
+    body.theme-iching .hexagram-hud {
+        width: 100%;
+        border-radius: 16px;
+        padding: 1.1rem;
+    }
+
+    body.theme-iching .coins-row {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    body.theme-iching .coin {
+        width: 72px;
+        height: 72px;
+    }
+
+    body.theme-iching #btn-cast-coin {
+        position: sticky;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        z-index: 30;
+        box-shadow: 0 12px 40px rgba(88, 232, 204, 0.2);
+    }
+
+    body.theme-iching #screen-result {
+        padding-top: max(72px, calc(60px + env(safe-area-inset-top)));
+    }
+
+    body.theme-iching .result-plain-speak-banner {
+        width: 100%;
+        position: sticky;
+        top: 58px;
+        z-index: 20;
+    }
+
+    body.theme-iching .result-wrapper {
+        width: 100%;
+        padding-top: 0;
+        max-height: none;
+        gap: 1rem;
+    }
+
+    body.theme-iching .result-card-container {
+        padding: 1.25rem;
+        border-radius: 14px;
+    }
+
+    body.theme-iching .card-hex-name {
+        font-size: clamp(2rem, 8vw, 2.6rem);
+    }
+
+    body.theme-iching .result-ai-console {
+        min-height: 320px;
+        border-radius: 14px;
+    }
+
+    body.theme-iching .console-body {
+        padding: 1.1rem;
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    body.theme-iching .premium-frame {
+        border-radius: 16px;
+    }
+}
+
+/* Extra visual polish — both themes */
+body.theme-oracle .landing-glass-card,
+body.theme-oracle .glass-card,
+body.theme-iching .intro-glass-shell,
+body.theme-iching .form-card {
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+body.theme-oracle .btn-mystic,
+body.theme-iching .btn-primary-oracle {
+    letter-spacing: 0.14em;
+}
+
+body.theme-oracle .zodiac-badge-large,
+body.theme-iching .bagua-wheel-container {
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 0 40px rgba(88, 232, 204, 0.12);
+}
+
+@media (max-width: 768px) {
+    body.theme-oracle .floating-runes-container {
+        opacity: 0.35;
+    }
+
+    body.theme-oracle .constellation-svg {
+        opacity: 0.08;
+    }
+
+    body.theme-iching .intro-hud-left,
+    body.theme-iching .intro-hud-right {
+        display: none !important;
     }
 
     body.theme-oracle .results-grid {
-        gap: 18px;
+        gap: 14px;
     }
 }

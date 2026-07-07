@@ -33,9 +33,17 @@
 
 @media (max-width: 700px) {
     .back-home-btn {
-        top: 14px;
-        left: 14px;
-        padding: 8px 12px;
+        top: max(14px, env(safe-area-inset-top));
+        left: max(14px, env(safe-area-inset-left));
+        padding: 10px 12px;
         font-size: 0.7rem;
+    }
+
+    .back-home-btn span {
+        display: none;
+    }
+
+    body.theme-iching .back-home-btn {
+        top: max(12px, env(safe-area-inset-top));
     }
 }

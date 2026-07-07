@@ -1067,6 +1067,14 @@ body::after {
 
 /* Responsive Breakpoints & Mobile Optimization */
 @media (max-width: 1024px) {
+    .app-container {
+        padding:
+            max(16px, env(safe-area-inset-top))
+            max(16px, env(safe-area-inset-right))
+            max(20px, env(safe-area-inset-bottom))
+            max(16px, env(safe-area-inset-left));
+    }
+
     .results-grid {
         display: flex;
         flex-direction: column;
