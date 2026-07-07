@@ -30,13 +30,20 @@ body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     font-family: 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', serif;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
     height: 100vh;
     width: 100vw;
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+body.theme-iching {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
 }
 
 /* CRT CRT 模拟偏光扫描网格 */
@@ -181,6 +188,26 @@ body.theme-iching main {
     pointer-events: auto;
 }
 
+body.theme-iching .screen {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding: 92px 16px 32px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    height: auto;
+}
+
+body.theme-iching #screen-divination,
+body.theme-iching #screen-result {
+    justify-content: center;
+}
+
+body.theme-iching #screen-result {
+    padding-top: 88px;
+}
+
 /* Screen 1: 启阵 (主入口) */
 .intro-container {
     text-align: center;
@@ -189,7 +216,8 @@ body.theme-iching main {
     align-items: center;
     gap: 32px;
     z-index: 20;
-    margin-top: 40px;
+    margin-top: 0;
+    width: min(720px, 100%);
 }
 
 /* 太极核心定位圈，悬浮在星盘中心 */
@@ -608,10 +636,9 @@ body.theme-iching main {
 
 /* Screen 2: 问事表单与画符面板 (起卦表单) */
 .form-container {
-    width: 90%;
-    max-width: 580px;
+    width: min(580px, 100%);
     z-index: 20;
-    margin-top: 70px;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1050,7 +1077,8 @@ body.theme-iching main {
 /* Screen 4: 终局解卦 */
 #screen-result {
     justify-content: flex-start;
-    padding: 78px 0 28px;
+    padding-top: 88px;
+    padding-bottom: 28px;
     overflow-y: auto;
 }
 
@@ -1358,9 +1386,17 @@ body.theme-iching main {
 
     /* 2. 主页面 (Screen 1) 手机适配 */
     .intro-container {
-        gap: 20px;
-        margin-top: 50px;
-        width: 90%;
+        gap: 12px;
+        margin-top: 0;
+        width: 100%;
+    }
+
+    body.theme-iching .intro-glass-shell {
+        padding: 1.5rem 1rem 1.25rem;
+    }
+    
+    body.theme-iching .screen {
+        padding: 76px 12px 24px;
     }
     
     .bagua-wheel-container {

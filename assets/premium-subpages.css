@@ -232,7 +232,13 @@ body.theme-oracle .drawing-canvas.charged {
 /* ── 赛博周易 ── */
 body.theme-iching .intro-glass-shell {
     position: relative;
-    padding: 2.5rem 3rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+    width: 100%;
+    padding: 2rem 2rem 1.75rem;
     border-radius: 28px;
     border: 1px solid rgba(88, 232, 204, 0.14);
     background:
@@ -245,6 +251,11 @@ body.theme-iching .intro-glass-shell {
         0 0 80px rgba(88, 232, 204, 0.06);
     max-width: 720px;
     margin: 0 auto;
+}
+
+.premium-frame > * {
+    position: relative;
+    z-index: 3;
 }
 
 body.theme-iching .intro-glass-shell::before {
@@ -271,8 +282,8 @@ body.theme-iching .form-container {
 
 body.theme-iching .form-main-title {
     font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
-    font-size: clamp(2.4rem, 6vw, 3.2rem);
-    letter-spacing: 0.35em;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    letter-spacing: 0.2em;
     background: linear-gradient(90deg, var(--neon-gold), #fff8e8, var(--neon-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

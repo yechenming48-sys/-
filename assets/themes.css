@@ -195,11 +195,17 @@ body.theme-iching::before {
 body.theme-iching .top-hud {
     width: min(1180px, calc(100% - 2rem));
     left: 50%;
+    right: auto;
     transform: translateX(-50%);
     top: 14px;
+    height: auto;
+    min-height: 58px;
+    padding: 0.65rem 1.5rem;
     border-radius: 999px;
     border: 1px solid rgba(88, 232, 204, 0.14);
-    background: rgba(4, 5, 8, 0.62);
+    border-bottom: 1px solid rgba(88, 232, 204, 0.14);
+    background: rgba(4, 5, 8, 0.72);
+    backdrop-filter: blur(18px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.32);
 }
 
@@ -261,6 +267,9 @@ body.theme-iching #screen-drawing .form-main-subtitle {
     body.theme-ziwei header,
     body.theme-iching .top-hud {
         width: calc(100% - 1.2rem);
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
         border-radius: 22px;
         flex-direction: column;
         gap: 0.8rem;
