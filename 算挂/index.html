@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>赛博周易 · 全息天机占卜台</title>
     <meta name="description" content="赛博周易占卜系统。融合东方玄学水墨与科幻霓虹，提供画符仪式、爻线推演及AI解卦。">
-    <link rel="stylesheet" href="../assets/shared-ui.css">
+    <link rel="stylesheet" href="/assets/shared-ui.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../assets/atmosphere.css">
-    <link rel="stylesheet" href="../assets/themes.css">
-    <link rel="stylesheet" href="../assets/plain-speak.css">
+    <link rel="stylesheet" href="/assets/atmosphere.css">
+    <link rel="stylesheet" href="/assets/themes.css">
+    <link rel="stylesheet" href="/assets/plain-speak.css">
 </head>
 <body class="theme-iching">
 
@@ -19,7 +19,7 @@
 
     <!-- 顶部 HUD 导航栏 -->
     <header class="top-hud">
-        <a href="../index.html" class="back-home-btn" title="返回玄机阁主页">
+        <a href="/index.html" class="back-home-btn" title="返回玄机阁主页">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             玄机阁
         </a>
@@ -257,6 +257,7 @@
 
         <!-- SCREEN 4: 赛博解卦 (结果报告) -->
         <section id="screen-result" class="screen">
+            <div class="result-plain-speak-banner" id="plain-speak-output" aria-live="polite"></div>
             <div class="result-wrapper">
                 <!-- 左侧：结缘卡片 -->
                 <div class="result-card-container">
@@ -286,15 +287,6 @@
                 <!-- 右侧：AI 终端屏幕 -->
                 <div class="result-ai-console">
                     <div class="console-header">
-                        <span>说人话区 · PLAIN_ORACLE</span>
-                        <div class="console-dots">
-                            <span class="console-dot"></span>
-                            <span class="console-dot"></span>
-                            <span class="console-dot"></span>
-                        </div>
-                    </div>
-                    <div class="console-body console-body-plain" id="plain-speak-output"></div>
-                    <div class="console-header console-header-secondary">
                         <span>TERMINAL: AI_ORACLE_DECRYPTOR</span>
                         <div class="console-dots">
                             <span class="console-dot"></span>
@@ -317,8 +309,8 @@
     </main>
 
     <!-- 顺序加载JS逻辑模块 -->
-    <script src="../assets/atmosphere.js"></script>
-    <script src="../assets/plain-speak.js"></script>
+    <script src="/assets/atmosphere.js"></script>
+    <script src="/assets/plain-speak.js"></script>
     <script src="iching.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>

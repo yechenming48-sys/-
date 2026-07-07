@@ -354,6 +354,34 @@ class AudioController {
 
 const audio = new AudioController();
 
+function renderIChingPlainSpeak(targetEl, context) {
+    if (!targetEl) return;
+
+    if (window.PlainSpeak) {
+        window.PlainSpeak.render(targetEl, context);
+        return;
+    }
+
+    const question = context.question || '我最近运势怎么样？';
+    const prob = context.scores?.general || 65;
+    const label = prob >= 70 ? '大概率会' : prob >= 55 ? '有机会' : '一半一半';
+    targetEl.innerHTML = `
+        <div class="plain-speak-card prob-mid">
+            <div class="plain-speak-header">
+                <span class="plain-speak-badge">说人话</span>
+                <span class="plain-speak-tag">直白解读 · 仅供参考</span>
+            </div>
+            <p class="plain-speak-question">你问：${question}</p>
+            <div class="plain-speak-verdict">
+                <span class="plain-speak-prob">${prob}%</span>
+                <span class="plain-speak-label">${label}</span>
+            </div>
+            <p class="plain-speak-body">卦象已经出来了，整体趋势${prob >= 60 ? '偏顺' : '平平'}。别想太复杂，该行动就行动，该等就等。</p>
+        </div>
+    `;
+    targetEl.classList.add('plain-speak-visible');
+}
+
 // UI 流程控制与状态
 const App = {
     // 画符模块数据
@@ -855,33 +883,46 @@ const App = {
         this.switchScreen('screen-result');
         audio.playBell(392.00, 3.5); // G4 磬声，震荡人心
 
-        // 启动右侧控制台的 AI 打字机
-        this.startAITyping(result, { hexCode, changeCode });
-    },
-
-    startAITyping(result, hexMeta = {}) {
-        const consoleBody = document.getElementById('console-text-body');
-        consoleBody.innerHTML = '';
+        const questionInput = document.getElementById('input-question');
+        const categoryInput = document.getElementById('select-category');
+        if (questionInput && !this.divination.question) {
+            this.divination.question = questionInput.value.trim();
+        }
+        if (categoryInput && categoryInput.value) {
+            this.divination.category = categoryInput.value;
+        } else if (!this.divination.category) {
+            this.divination.category = 'general';
+        }
 
         const plainEl = document.getElementById('plain-speak-output');
-        if (window.PlainSpeak && plainEl) {
-            const scores = window.PlainSpeak.scoresFromSeed(
-                (hexMeta.hexCode || '') + (hexMeta.changeCode || '') + this.divination.question
-            );
-            const topicScore = scores[this.divination.category] || scores.general;
-            scores[this.divination.category] = Math.round((topicScore + (result.judgment.length % 20)) / 2 + 25);
-
-            window.PlainSpeak.render(plainEl, {
-                question: this.divination.question,
-                category: this.divination.category,
-                scores,
-                signals: {
-                    hasChange: hexMeta.hexCode !== hexMeta.changeCode,
-                    positive: /元亨利贞|吉/.test(result.judgment)
-                },
-                seedText: (hexMeta.hexCode || '') + this.divination.question
-            });
+        const scores = window.PlainSpeak
+            ? window.PlainSpeak.scoresFromSeed(hexCode + changeCode + this.divination.question)
+            : { general: 65, love: 65, career: 65, wealth: 65, health: 65 };
+        const topic = this.divination.category || 'general';
+        if (scores[topic] !== undefined) {
+            scores[topic] = Math.min(92, Math.max(35, scores[topic] + (result.judgment.length % 12) - 4));
         }
+
+        renderIChingPlainSpeak(plainEl, {
+            question: this.divination.question,
+            category: this.divination.category,
+            scores,
+            signals: {
+                hasChange: hexCode !== changeCode,
+                positive: /元亨利贞|吉|亨/.test(result.judgment)
+            },
+            seedText: hexCode + changeCode + this.divination.question
+        });
+
+        plainEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // 启动右侧控制台的 AI 打字机
+        this.startAITyping(result);
+    },
+
+    startAITyping(result) {
+        const consoleBody = document.getElementById('console-text-body');
+        consoleBody.innerHTML = '';
 
         // 结构化需要输出的各个模块
         const sections = [

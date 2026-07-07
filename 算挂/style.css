@@ -1043,13 +1043,33 @@ body::before {
 }
 
 /* Screen 4: 终局解卦 */
+#screen-result {
+    justify-content: flex-start;
+    padding: 78px 0 28px;
+    overflow-y: auto;
+}
+
+.result-plain-speak-banner {
+    width: 92%;
+    max-width: 1150px;
+    margin: 0 auto 18px;
+    z-index: 25;
+    flex-shrink: 0;
+}
+
+.result-plain-speak-banner:not(.plain-speak-visible) {
+    display: none;
+}
+
 .result-wrapper {
     display: flex;
     gap: 35px;
     width: 92%;
     max-width: 1150px;
-    height: 82%;
-    max-height: 720px;
+    height: auto;
+    min-height: 0;
+    flex: 1;
+    max-height: min(720px, calc(100vh - 260px));
     z-index: 20;
 }
 
@@ -1499,6 +1519,15 @@ body::before {
     }
 
     /* 5. 结缘解卦 (Screen 4) 手机适配 */
+    #screen-result {
+        padding-top: 64px;
+    }
+
+    .result-plain-speak-banner {
+        width: 94%;
+        margin-bottom: 14px;
+    }
+
     .result-wrapper {
         flex-direction: column;
         padding-top: 70px;
