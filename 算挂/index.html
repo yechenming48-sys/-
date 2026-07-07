@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="/assets/atmosphere.css">
     <link rel="stylesheet" href="/assets/themes.css">
     <link rel="stylesheet" href="/assets/plain-speak.css">
+    <link rel="stylesheet" href="/assets/premium-subpages.css">
 </head>
 <body class="theme-iching">
 
     <!-- 背景粒子与 3D 网格/球体画布 -->
     <canvas id="particle-canvas"></canvas>
     <div id="page-spotlight" aria-hidden="true"></div>
+    <div class="page-aurora" aria-hidden="true"></div>
 
     <!-- 顶部 HUD 导航栏 -->
     <header class="top-hud">
@@ -74,6 +76,7 @@
             </div>
 
             <div class="intro-container">
+                <div class="intro-glass-shell premium-frame">
                 <!-- 核心太极旋转轮 (高科技 SVG 反应堆版) -->
                 <div class="bagua-wheel-container" id="taiji-core-btn">
                     <svg class="taiji-svg-core" viewBox="0 0 200 200">
@@ -121,17 +124,19 @@
                         </span>
                     </button>
                 </div>
+                </div>
             </div>
         </section>
 
         <!-- SCREEN 2: 凝神画符与问事输入 (信息表单) -->
         <section id="screen-drawing" class="screen">
             <div class="form-container">
+                <div class="page-kicker"><span class="dot"></span> RITUAL INPUT</div>
                 <h2 class="form-main-title">起 卦</h2>
                 <p class="form-main-subtitle">心诚则灵，静心默念你的问题，点击起卦</p>
 
                 <!-- 问事信息卡片 -->
-                <div class="form-card">
+                <div class="form-card premium-frame">
                     
                     <!-- 1. 问事类别 -->
                     <div class="form-group">

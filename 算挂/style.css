@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=ZCOOL+QingKe+HuangYou&family=Noto+Serif+SC:wght@300;400;600;900&family=Share+Tech+Mono&family=Outfit:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Noto+Serif+SC:wght@300;400;600;900&family=Share+Tech+Mono&family=Outfit:wght@300;400;600&display=swap');
 
 /* 赛博周易 4.0 - 终极太虚水墨视觉系统 */
 :root {
@@ -62,6 +62,11 @@ body::before {
     height: 100%;
     z-index: 1;
     pointer-events: none;
+}
+
+body.theme-iching main {
+    position: relative;
+    z-index: 5;
 }
 
 /* 顶部 HUD 导航栏 (升级为超清玻璃态) */

@@ -10,18 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Noto+Serif+SC:wght@300;500;700;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for mystical icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/shared-ui.css">
+    <link rel="stylesheet" href="/assets/shared-ui.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../assets/atmosphere.css">
-    <link rel="stylesheet" href="../assets/themes.css">
-    <link rel="stylesheet" href="../assets/plain-speak.css">
+    <link rel="stylesheet" href="/assets/atmosphere.css">
+    <link rel="stylesheet" href="/assets/themes.css">
+    <link rel="stylesheet" href="/assets/plain-speak.css">
+    <link rel="stylesheet" href="/assets/premium-subpages.css">
 </head>
 <body class="theme-oracle">
     <!-- Background Canvas for Particles -->
     <canvas id="particle-canvas"></canvas>
     <div id="page-spotlight" aria-hidden="true"></div>
+    <div class="page-aurora" aria-hidden="true"></div>
     <!-- Back to Home -->
-    <a href="../index.html" class="back-home-btn" title="返回玄机阁主页">
+    <a href="/index.html" class="back-home-btn" title="返回玄机阁主页">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
         <span>玄机阁</span>
     </a>
@@ -99,7 +101,7 @@
                 </div>
 
                 <!-- Glassmorphic Landing Card -->
-                <div class="landing-glass-card fade-in-up">
+                <div class="landing-glass-card premium-frame fade-in-up">
                     <div class="page-kicker"><span class="dot"></span> COSMIC ORACLE RITUAL</div>
                     <h1 class="mystic-title">星轨神谕</h1>
                     
@@ -131,7 +133,7 @@
         <!-- 2. INPUT SCREEN -->
         <section class="screen" id="screen-input">
             <div class="content-wrapper">
-                <div class="glass-card fade-in-up">
+                <div class="glass-card premium-frame fade-in-up">
                     <div class="card-header">
                         <h2>星盘契约</h2>
                         <p class="card-subtitle">请留下您的印记，以便AI读取对应的宇宙频率</p>
@@ -211,7 +213,7 @@
         <!-- 2.5 TALISMAN DRAWING SCREEN (New Interactive Drawing Step) -->
         <section class="screen" id="screen-draw">
             <div class="content-wrapper">
-                <div class="glass-card drawing-card fade-in-up text-center">
+                <div class="glass-card drawing-card premium-frame fade-in-up text-center">
                     <div class="card-header">
                         <h2>手书契印</h2>
                         <p class="card-subtitle">请凭直觉在圆盘中画出您的命运符号（画完才会激发光芒）</p>
@@ -276,7 +278,7 @@
                 <div class="results-grid">
                     
                     <!-- Left Column: Astro Stats & Key Attributes -->
-                    <div class="result-card glass-card side-panel fade-in-left">
+                    <div class="result-card glass-card side-panel premium-frame fade-in-left">
                         <div class="zodiac-badge-large" id="res-zodiac-icon">
                             <i class="fa-solid fa-cloud-moon"></i>
                         </div>
@@ -342,7 +344,7 @@
                     </div>
 
                     <!-- Center Column: Tarot Draw Section -->
-                    <div class="result-card glass-card tarot-panel text-center fade-in-up">
+                    <div class="result-card glass-card tarot-panel premium-frame text-center fade-in-up">
                         <h3 class="section-title"><i class="fa-solid fa-cards"></i> 命运之镜 • 塔罗指引</h3>
                         <p class="section-subtitle">随机抽取的共鸣塔罗牌，预示当前能量状态</p>
                         
@@ -419,7 +421,7 @@
                     </div>
 
                     <!-- Right Column: AI Oracle Output -->
-                    <div class="result-card glass-card oracle-panel fade-in-right">
+                    <div class="result-card glass-card oracle-panel premium-frame fade-in-right">
                         <div class="panel-header">
                             <i class="fa-solid fa-comments"></i>
                             <h3>说人话 · 直白解读</h3>
@@ -458,8 +460,8 @@
     <!-- Background music loader (Mystical cosmic pad/ambient loop) -->
     <audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
 
-    <script src="../assets/atmosphere.js"></script>
-    <script src="../assets/plain-speak.js"></script>
+    <script src="/assets/atmosphere.js"></script>
+    <script src="/assets/plain-speak.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
 </body>

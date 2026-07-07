@@ -60,6 +60,23 @@ body.theme-oracle .feature-chip {
     border-color: rgba(0, 242, 254, 0.18);
 }
 
+body.theme-oracle .premium-frame.landing-glass-card,
+body.theme-oracle .premium-frame.glass-card {
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(236, 56, 188, 0.1);
+}
+
+body.theme-oracle .btn-mystic {
+    border-radius: 999px;
+    letter-spacing: 0.18em;
+}
+
+body.theme-oracle .results-wrapper {
+    position: relative;
+    z-index: 5;
+}
+
 /* ============================================================
    紫微天枢
    ============================================================ */
@@ -223,6 +240,21 @@ body.theme-iching .feature-chip {
 
 body.theme-iching .btn-primary-oracle {
     animation: oraclePulse 3s ease-in-out infinite, shine-iching 6s linear infinite;
+}
+
+body.theme-iching .intro-container {
+    gap: 0;
+}
+
+body.theme-iching .casting-wrapper .coins-container,
+body.theme-iching .casting-wrapper .hexagram-hud {
+    backdrop-filter: blur(18px);
+}
+
+body.theme-iching #screen-drawing .form-main-subtitle {
+    color: rgba(203, 213, 225, 0.65);
+    letter-spacing: 0.12em;
+    margin-bottom: 1.5rem;
 }
 
 @media (max-width: 768px) {

@@ -33,6 +33,10 @@ body {
     position: relative;
 }
 
+body.theme-oracle .app-container {
+    z-index: 6;
+}
+
 /* Cosmic vignette overlay shading the edges for a mysterious feel */
 body::after {
     content: '';
