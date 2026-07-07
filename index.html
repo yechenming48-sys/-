@@ -5,836 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>玄机阁 · 东方神秘命理门户</title>
     <meta name="description" content="玄机阁 — 汇聚星轨神谕、紫微天枢、赛博周易三大命理系统，探索东方玄学与未来科技的交汇之境。">
-
-    <!-- Google Fonts -->
+    <meta name="theme-color" content="#03000f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+SC:wght@300;400;600;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ============================================================
-           Design Tokens
-        ============================================================ */
-        :root {
-            --bg: #020010;
-            --bg-mid: #07001e;
-            --gold: #c9a227;
-            --gold-light: #ffe082;
-            --gold-dim: rgba(201,162,39,0.18);
-            --cyan: #00f2fe;
-            --cyan-dim: rgba(0,242,254,0.15);
-            --purple: #9254de;
-            --green: #39ff14;
-            --text: #f0ecff;
-            --text-muted: #8884aa;
-            --glass: rgba(10,5,35,0.6);
-            --glass-border: rgba(255,255,255,0.07);
-            --glass-strong: rgba(14,8,42,0.74);
-            --panel-highlight: rgba(255,255,255,0.12);
-        }
-
-        /* ============================================================
-           Reset & Base
-        ============================================================ */
-        *, *::before, *::after {
-            margin: 0; padding: 0; box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%; height: 100%;
-            overflow-x: hidden;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Outfit', 'Noto Serif SC', sans-serif;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            inset: -20%;
-            background:
-                radial-gradient(circle at 18% 20%, rgba(0,242,254,0.12), transparent 28%),
-                radial-gradient(circle at 82% 14%, rgba(146,84,222,0.16), transparent 30%),
-                radial-gradient(circle at 50% 82%, rgba(201,162,39,0.10), transparent 32%);
-            filter: blur(18px);
-            opacity: 0.78;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* ============================================================
-           Background Canvas
-        ============================================================ */
-        #bg-canvas {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Vignette */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(ellipse at center, transparent 35%, rgba(2,0,16,0.88) 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* ============================================================
-           Layout
-        ============================================================ */
-        .site-wrapper {
-            position: relative;
-            z-index: 2;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .top-bar {
-            width: min(1180px, calc(100% - 3rem));
-            margin-top: 1.2rem;
-            padding: 0.75rem 0.9rem;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 999px;
-            background: rgba(8,4,28,0.58);
-            backdrop-filter: blur(16px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.24);
-        }
-
-        .brand-mark {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            min-width: 0;
-        }
-
-        .brand-sigil {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-            color: var(--gold-light);
-            background: radial-gradient(circle, rgba(255,224,130,0.14), rgba(201,162,39,0.04));
-            border: 1px solid rgba(255,224,130,0.22);
-            box-shadow: 0 0 18px rgba(201,162,39,0.22);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.08rem;
-            white-space: nowrap;
-        }
-
-        .brand-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.86rem;
-            letter-spacing: 0.18em;
-            color: var(--gold-light);
-        }
-
-        .brand-subtitle {
-            font-size: 0.62rem;
-            letter-spacing: 0.14em;
-            color: rgba(240,236,255,0.46);
-        }
-
-        .top-links {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .top-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            padding: 0.46rem 0.8rem;
-            border-radius: 999px;
-            border: 1px solid transparent;
-            transition: color 0.28s ease, border-color 0.28s ease, background 0.28s ease;
-        }
-
-        .top-link:hover {
-            color: var(--gold-light);
-            border-color: rgba(201,162,39,0.28);
-            background: rgba(201,162,39,0.08);
-        }
-
-        /* ============================================================
-           Header
-        ============================================================ */
-        header {
-            width: 100%;
-            padding: 2.1rem 3rem 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .header-content {
-            text-align: center;
-            max-width: 960px;
-        }
-
-        .hero-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            margin-bottom: 1.15rem;
-            padding: 0.42rem 0.88rem;
-            border-radius: 999px;
-            border: 1px solid rgba(0,242,254,0.16);
-            background: rgba(0,242,254,0.055);
-            color: rgba(240,236,255,0.72);
-            font-size: 0.68rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            box-shadow: 0 0 26px rgba(0,242,254,0.08);
-        }
-
-        .hero-kicker .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--cyan);
-            box-shadow: 0 0 12px var(--cyan);
-        }
-
-        /* Top ornament line */
-        .ornament-line {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .ornament-line .line {
-            height: 1px;
-            width: 80px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .ornament-line .diamond {
-            font-size: 0.7rem;
-            color: var(--gold);
-            text-shadow: 0 0 12px var(--gold);
-        }
-
-        .site-title {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.4rem, 5vw, 4rem);
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            background: linear-gradient(135deg, #ffe082 0%, #c9a227 40%, #ffe082 70%, #c9a227 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(201,162,39,0.5));
-            text-transform: uppercase;
-        }
-
-        .site-title-cn {
-            font-family: 'Noto Serif SC', serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 900;
-            letter-spacing: 0.5em;
-            color: var(--gold-light);
-            text-shadow: 0 0 30px rgba(255,224,130,0.4);
-            margin-top: 0.2rem;
-        }
-
-        .site-subtitle {
-            margin-top: 0.9rem;
-            font-size: clamp(0.78rem, 1.4vw, 0.95rem);
-            font-weight: 300;
-            color: var(--text-muted);
-            letter-spacing: 0.25em;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .hero-copy {
-            width: min(720px, 92vw);
-            margin: 1.35rem auto 0;
-            color: rgba(240,236,255,0.72);
-            font-size: clamp(0.95rem, 1.45vw, 1.08rem);
-            line-height: 1.9;
-            font-weight: 300;
-        }
-
-        .hero-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.8rem;
-            width: min(700px, 92vw);
-            margin: 1.6rem auto 0;
-        }
-
-        .metric-pill {
-            position: relative;
-            overflow: hidden;
-            padding: 0.82rem 0.9rem;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            background: rgba(255,255,255,0.035);
-            backdrop-filter: blur(10px);
-        }
-
-        .metric-pill::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,224,130,0.12), transparent 55%);
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .metric-value {
-            position: relative;
-            display: block;
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-        }
-
-        .metric-label {
-            position: relative;
-            display: block;
-            margin-top: 0.22rem;
-            color: rgba(240,236,255,0.48);
-            font-size: 0.68rem;
-            letter-spacing: 0.14em;
-        }
-
-        /* ============================================================
-           Rotating Mandala Decoration
-        ============================================================ */
-        .mandala-wrap {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 2.2rem auto 0;
-        }
-
-        .mandala-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 1px solid;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mandala-ring.r1 {
-            border-color: rgba(201,162,39,0.5);
-            animation: spin 20s linear infinite;
-        }
-
-        .mandala-ring.r2 {
-            inset: 12px;
-            border-color: rgba(0,242,254,0.3);
-            border-style: dashed;
-            animation: spin 12s linear infinite reverse;
-        }
-
-        .mandala-ring.r3 {
-            inset: 28px;
-            border-color: rgba(146,84,222,0.4);
-            animation: spin 8s linear infinite;
-        }
-
-        .mandala-center {
-            position: absolute;
-            inset: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { filter: drop-shadow(0 0 6px var(--gold)); opacity: 0.8; }
-            50%       { filter: drop-shadow(0 0 18px var(--gold)); opacity: 1; }
-        }
-
-        /* ============================================================
-           Section Label
-        ============================================================ */
-        .section-label {
-            margin-top: 3.5rem;
-            text-align: center;
-            font-size: 0.72rem;
-            letter-spacing: 0.45em;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-family: 'Cinzel', serif;
-        }
-
-        .section-label::before,
-        .section-label::after {
-            content: '— ';
-            color: var(--gold);
-            opacity: 0.5;
-        }
-
-        /* ============================================================
-           Cards Grid
-        ============================================================ */
-        .cards-section {
-            width: 100%;
-            max-width: 1200px;
-            padding: 2.1rem 2rem 5rem;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 1.8rem;
-        }
-
-        /* ============================================================
-           Portal Card
-        ============================================================ */
-        .portal-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: linear-gradient(180deg, var(--glass-strong), rgba(6,3,26,0.58));
-            border: 1px solid rgba(255,255,255,0.085);
-            backdrop-filter: blur(16px);
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            min-height: 100%;
-            transition: transform 0.45s cubic-bezier(0.23,1,0.32,1),
-                        box-shadow 0.45s cubic-bezier(0.23,1,0.32,1),
-                        border-color 0.45s ease;
-            animation: card-appear 0.8s ease both;
-        }
-
-        .portal-card:nth-child(1) { animation-delay: 0.1s; }
-        .portal-card:nth-child(2) { animation-delay: 0.25s; }
-        .portal-card:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes card-appear {
-            from { opacity: 0; transform: translateY(40px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Accent top border per card */
-        .portal-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--card-accent);
-            opacity: 0.8;
-            transition: opacity 0.4s, height 0.4s;
-            z-index: 3;
-        }
-
-        /* Glow overlay on hover */
-        .portal-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 0%, var(--card-glow) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.45s ease;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .portal-card:hover {
-            transform: translateY(-10px) scale(1.015);
-            border-color: var(--card-accent-rgba);
-        }
-
-        .portal-card:focus-visible,
-        .top-link:focus-visible {
-            outline: 2px solid var(--gold-light);
-            outline-offset: 4px;
-        }
-
-        .portal-card:hover::after {
-            opacity: 1;
-        }
-
-        .portal-card:hover::before {
-            height: 3px;
-            opacity: 1;
-        }
-
-        /* Card 1 — 星轨神谕 (cyan/pink) */
-        .card-oracle {
-            --card-accent: linear-gradient(90deg, #ec38bc, #00f2fe);
-            --card-accent-rgba: rgba(0,242,254,0.4);
-            --card-glow: rgba(0,242,254,0.12);
-        }
-        .card-oracle:hover {
-            box-shadow: 0 20px 60px rgba(0,242,254,0.2), 0 0 0 1px rgba(0,242,254,0.25);
-        }
-
-        /* Card 2 — 紫微天枢 (gold) */
-        .card-ziwei {
-            --card-accent: linear-gradient(90deg, #c9a227, #ffe082, #c9a227);
-            --card-accent-rgba: rgba(201,162,39,0.4);
-            --card-glow: rgba(201,162,39,0.12);
-        }
-        .card-ziwei:hover {
-            box-shadow: 0 20px 60px rgba(201,162,39,0.2), 0 0 0 1px rgba(201,162,39,0.3);
-        }
-
-        /* Card 3 — 赛博周易 (green neon) */
-        .card-iching {
-            --card-accent: linear-gradient(90deg, #39ff14, #58e8cc);
-            --card-accent-rgba: rgba(57,255,20,0.4);
-            --card-glow: rgba(57,255,20,0.10);
-        }
-        .card-iching:hover {
-            box-shadow: 0 20px 60px rgba(57,255,20,0.18), 0 0 0 1px rgba(57,255,20,0.25);
-        }
-
-        /* ---- Card Inner ---- */
-        .card-inner {
-            position: relative;
-            z-index: 2;
-            padding: 2rem 1.8rem 2.2rem;
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-        }
-
-        /* Card header row */
-        .card-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-icon-wrap {
-            width: 62px;
-            height: 62px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.9rem;
-            background: var(--card-icon-bg);
-            border: 1px solid var(--card-icon-border);
-            flex-shrink: 0;
-            transition: transform 0.4s ease;
-        }
-
-        .portal-card:hover .card-icon-wrap {
-            transform: rotate(15deg) scale(1.1);
-        }
-
-        .card-oracle .card-icon-wrap {
-            --card-icon-bg: rgba(0,242,254,0.1);
-            --card-icon-border: rgba(0,242,254,0.25);
-        }
-
-        .card-ziwei .card-icon-wrap {
-            --card-icon-bg: rgba(201,162,39,0.12);
-            --card-icon-border: rgba(201,162,39,0.3);
-        }
-
-        .card-iching .card-icon-wrap {
-            --card-icon-bg: rgba(57,255,20,0.08);
-            --card-icon-border: rgba(57,255,20,0.25);
-        }
-
-        .card-badge {
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
-            font-family: 'Cinzel', serif;
-            padding: 0.25rem 0.7rem;
-            border-radius: 20px;
-            border: 1px solid var(--card-accent-rgba);
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        /* Card body text */
-        .card-name-en {
-            font-family: 'Cinzel', serif;
-            font-size: 0.72rem;
-            letter-spacing: 0.3em;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-        }
-
-        .card-name-cn {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            line-height: 1.2;
-        }
-
-        .card-oracle .card-name-cn {
-            background: linear-gradient(135deg, #ec38bc, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-ziwei .card-name-cn {
-            background: linear-gradient(135deg, #ffe082, #c9a227);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-iching .card-name-cn {
-            background: linear-gradient(135deg, #39ff14, #58e8cc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-desc {
-            margin-top: 0.9rem;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        .card-meta {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.55rem;
-            margin-top: 1.25rem;
-        }
-
-        .meta-item {
-            padding: 0.62rem 0.7rem;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 10px;
-            background: rgba(255,255,255,0.035);
-        }
-
-        .meta-label {
-            display: block;
-            color: rgba(240,236,255,0.38);
-            font-size: 0.62rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .meta-value {
-            display: block;
-            margin-top: 0.22rem;
-            color: rgba(240,236,255,0.78);
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-        }
-
-        /* Tags row */
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.4rem;
-        }
-
-        .tag {
-            font-size: 0.68rem;
-            padding: 0.22rem 0.65rem;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-
-        /* CTA button row */
-        .card-cta {
-            margin-top: auto;
-            padding-top: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.6rem;
-            font-size: 0.82rem;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.12em;
-            opacity: 0.55;
-            transition: opacity 0.3s, gap 0.3s;
-            color: var(--text);
-        }
-
-        .portal-card:hover .card-cta {
-            opacity: 1;
-            gap: 1rem;
-        }
-
-        .cta-arrow {
-            font-size: 1rem;
-            transition: transform 0.35s ease;
-        }
-
-        .portal-card:hover .cta-arrow {
-            transform: translateX(6px);
-        }
-
-        /* ============================================================
-           Decorative Dividers between Cards
-        ============================================================ */
-        .trio-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin: 0.5rem auto;
-            color: rgba(201,162,39,0.25);
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
-        }
-
-        /* ============================================================
-           Footer
-        ============================================================ */
-        footer {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 1.5rem 1rem 2.5rem;
-            font-size: 0.72rem;
-            color: rgba(136,132,170,0.4);
-            letter-spacing: 0.2em;
-            font-family: 'Cinzel', serif;
-        }
-
-        footer .footer-divider {
-            display: block;
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,162,39,0.3), transparent);
-            margin: 0 auto 1rem;
-        }
-
-        /* ============================================================
-           Floating runes background layer
-        ============================================================ */
-        .bg-runes {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .bg-rune {
-            position: absolute;
-            font-size: clamp(1rem, 2.5vw, 2rem);
-            opacity: 0.04;
-            animation: drift linear infinite;
-            white-space: nowrap;
-            color: var(--gold);
-        }
-
-        @keyframes drift {
-            0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            5%   { opacity: 0.05; }
-            95%  { opacity: 0.05; }
-            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* ============================================================
-           Responsive
-        ============================================================ */
-        @media (max-width: 700px) {
-            .top-bar {
-                width: calc(100% - 1.6rem);
-                border-radius: 24px;
-                align-items: flex-start;
-                flex-direction: column;
-                padding: 0.85rem;
-            }
-            .top-links {
-                width: 100%;
-                justify-content: space-between;
-                gap: 0.3rem;
-            }
-            .top-link {
-                flex: 1;
-                text-align: center;
-                padding-inline: 0.45rem;
-            }
-            header { padding: 1.6rem 1.2rem 0; }
-            .site-title-cn { letter-spacing: 0.32em; }
-            .hero-metrics { grid-template-columns: 1fr; }
-            .cards-section { padding: 1.6rem 1rem 4rem; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .card-inner { padding: 1.5rem 1.3rem 1.8rem; }
-            .card-meta { grid-template-columns: 1fr; }
-            .mandala-wrap { margin-top: 1.8rem; }
-            .section-label { margin-top: 2.8rem; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                scroll-behavior: auto !important;
-                transition-duration: 0.001ms !important;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/portal.css">
 </head>
 <body>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div id="spotlight" aria-hidden="true"></div>
+    <div class="bg-runes" id="rune-layer" aria-hidden="true"></div>
 
-    <!-- Background star canvas -->
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- Floating rune layer -->
-    <div class="bg-runes" id="rune-layer"></div>
-
-    <div class="site-wrapper">
+    <div class="site-shell">
         <nav class="top-bar" aria-label="玄机阁导航">
-            <div class="brand-mark">
+            <a class="brand-mark" href="./index.html">
                 <div class="brand-sigil">✦</div>
-                <div class="brand-text">
+                <div>
                     <span class="brand-title">XUAN JI GE</span>
                     <span class="brand-subtitle">东方命理门户</span>
                 </div>
-            </div>
+            </a>
             <div class="top-links">
                 <a class="top-link" href="./ai-fortune-teller/index.html">星轨神谕</a>
                 <a class="top-link" href="./求签/index.html">紫微天枢</a>
@@ -842,20 +32,14 @@
             </div>
         </nav>
 
-        <!-- ========== HEADER ========== -->
-        <header>
-            <div class="header-content">
-                <div class="hero-kicker"><span class="dot"></span> 2026 ORACLE INTERFACE</div>
-                <div class="ornament-line">
-                    <div class="line"></div>
-                    <span class="diamond">✦ ✦ ✦</span>
-                    <div class="line"></div>
-                </div>
-                <div class="site-title">Xuan Ji Ge</div>
-                <div class="site-title-cn">玄 机 阁</div>
-                <div class="site-subtitle">ORACLE · DIVINATION · DESTINY — 东方命理·赛博玄学·星宿神谕</div>
-                <p class="hero-copy">
-                    将星盘、斗数与周易整合为一座沉浸式玄学入口。选择你的命理仪式，在光影、卦象与 AI 神谕之间开启一次更清晰的探索。
+        <header class="hero">
+            <div class="hero-copy-block">
+                <div class="hero-kicker"><span class="dot"></span> PREMIUM ORACLE EXPERIENCE</div>
+                <h1 class="hero-title-en">XUAN JI GE</h1>
+                <div class="hero-title-cn">玄 机 阁</div>
+                <p class="hero-subtitle">ORACLE · DIVINATION · DESTINY</p>
+                <p class="hero-desc">
+                    一座为东方玄学与现代交互而生的高颜值命理门户。星轨、斗数、周易三条命运路径在此交汇，以光影、符印与 AI 神谕，为你呈现更具仪式感的探索体验。
                 </p>
 
                 <div class="hero-metrics" aria-label="平台能力概览">
@@ -873,252 +57,157 @@
                     </div>
                 </div>
 
-                <!-- Rotating Mandala -->
-                <div class="mandala-wrap">
-                    <div class="mandala-ring r1"></div>
-                    <div class="mandala-ring r2"></div>
-                    <div class="mandala-ring r3"></div>
-                    <div class="mandala-center">☯</div>
+                <div class="hero-actions">
+                    <a class="hero-btn primary" href="#portals">进入命理之门</a>
+                    <a class="hero-btn ghost" href="./ai-fortune-teller/index.html">立即体验星轨神谕</a>
                 </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="aura-ring r1"></div>
+                <div class="aura-ring r2"></div>
+                <div class="aura-ring r3"></div>
+                <div class="hero-core">☯</div>
+                <div class="floating-chip c1">星轨流转</div>
+                <div class="floating-chip c2">紫微排盘</div>
+                <div class="floating-chip c3">赛博起卦</div>
             </div>
         </header>
 
-        <!-- ========== CARDS ========== -->
-        <div class="cards-section">
-            <div class="section-label">选择命理之门</div>
+        <section id="portals">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">Choose Your Portal</div>
+                    <h2 class="section-title">选择命理之门</h2>
+                </div>
+                <p class="section-note">三条不同气质的命运路径，从星盘契约到六爻起卦，为你提供高颜值、强沉浸的玄学体验。</p>
+            </div>
 
             <div class="cards-grid">
-
-                <!-- Card 1: 星轨神谕 -->
                 <a class="portal-card card-oracle" href="./ai-fortune-teller/index.html">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="card-icon-wrap">🌌</div>
-                            <div class="card-badge">AI ORACLE</div>
+                    <div class="card-preview">
+                        <div class="preview-glow"></div>
+                        <svg viewBox="0 0 400 148" preserveAspectRatio="none" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="oracleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="rgba(255,94,200,0.35)"/>
+                                    <stop offset="100%" stop-color="rgba(77,232,255,0.25)"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="148" fill="url(#oracleGrad)"/>
+                            <circle cx="70" cy="74" r="2.5" fill="#fff" opacity="0.8"/>
+                            <circle cx="140" cy="42" r="2" fill="#fff" opacity="0.7"/>
+                            <circle cx="220" cy="88" r="3" fill="#fff" opacity="0.9"/>
+                            <circle cx="310" cy="56" r="2.2" fill="#fff" opacity="0.75"/>
+                            <path d="M70 74 L140 42 L220 88 L310 56" stroke="rgba(255,255,255,0.28)" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-top">
+                            <span class="card-index">01</span>
+                            <span class="card-badge">AI ORACLE</span>
                         </div>
                         <div class="card-name-en">Star Orbit Oracle</div>
                         <div class="card-name-cn">星轨神谕</div>
-                        <div class="card-desc">
-                            AI 融合西方星盘玄术，解读你的宇宙运势与命运轨迹。输入出生信息，天机将在星粒流转间向你显现。
-                        </div>
-                        <div class="card-meta" aria-label="星轨神谕功能摘要">
-                            <div class="meta-item">
-                                <span class="meta-label">流程</span>
-                                <span class="meta-value">星盘契约</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">体验</span>
-                                <span class="meta-value">塔罗指引</span>
-                            </div>
+                        <p class="card-desc">AI 融合西方星盘玄术，以星粒流光、塔罗镜像与契约仪式，解读你的宇宙运势与命运轨迹。</p>
+                        <div class="card-meta">
+                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value">星盘契约</span></div>
+                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value">塔罗指引</span></div>
                         </div>
                         <div class="card-tags">
                             <span class="tag">星座占星</span>
                             <span class="tag">AI神谕</span>
                             <span class="tag">宇宙运势</span>
-                            <span class="tag">命运之门</span>
                         </div>
-                        <div class="card-cta">
-                            <span>进入神谕殿堂</span>
-                            <span class="cta-arrow">→</span>
-                        </div>
+                        <div class="card-cta"><span>进入神谕殿堂</span><span class="arrow">→</span></div>
                     </div>
                 </a>
 
-                <!-- Card 2: 紫微天枢 -->
                 <a class="portal-card card-ziwei" href="./求签/index.html">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="card-icon-wrap">🪐</div>
-                            <div class="card-badge">ZIWEI DOUSHU</div>
+                    <div class="card-preview">
+                        <div class="preview-glow"></div>
+                        <svg viewBox="0 0 400 148" preserveAspectRatio="none" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="ziweiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="rgba(232,200,114,0.28)"/>
+                                    <stop offset="100%" stop-color="rgba(255,240,200,0.12)"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="148" fill="url(#ziweiGrad)"/>
+                            <circle cx="200" cy="74" r="48" fill="none" stroke="rgba(255,231,168,0.35)" stroke-width="1"/>
+                            <circle cx="200" cy="74" r="32" fill="none" stroke="rgba(255,231,168,0.22)" stroke-dasharray="4 6"/>
+                            <path d="M200 26 L200 122 M152 74 L248 74" stroke="rgba(255,231,168,0.18)"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-top">
+                            <span class="card-index">02</span>
+                            <span class="card-badge">ZIWEI DOUSHU</span>
                         </div>
                         <div class="card-name-en">Purple Star Astrology</div>
                         <div class="card-name-cn">紫微天枢</div>
-                        <div class="card-desc">
-                            千年传承的紫微斗数排盘系统，以出生八字推演十二宫位，洞悉命运格局与人生走向。
-                        </div>
-                        <div class="card-meta" aria-label="紫微天枢功能摘要">
-                            <div class="meta-item">
-                                <span class="meta-label">流程</span>
-                                <span class="meta-value">在线排盘</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">体验</span>
-                                <span class="meta-value">斗数课堂</span>
-                            </div>
+                        <p class="card-desc">皇家紫金美学下的紫微斗数排盘系统，以十二宫位与星曜流转，推演人生格局与运势脉络。</p>
+                        <div class="card-meta">
+                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value">在线排盘</span></div>
+                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value">斗数课堂</span></div>
                         </div>
                         <div class="card-tags">
                             <span class="tag">紫微斗数</span>
                             <span class="tag">十二宫位</span>
                             <span class="tag">八字排盘</span>
-                            <span class="tag">斗数课堂</span>
                         </div>
-                        <div class="card-cta">
-                            <span>进入天枢殿堂</span>
-                            <span class="cta-arrow">→</span>
-                        </div>
+                        <div class="card-cta"><span>进入天枢殿堂</span><span class="arrow">→</span></div>
                     </div>
                 </a>
 
-                <!-- Card 3: 赛博周易 -->
                 <a class="portal-card card-iching" href="./算挂/index.html">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="card-icon-wrap">☰</div>
-                            <div class="card-badge">I CHING</div>
+                    <div class="card-preview">
+                        <div class="preview-glow"></div>
+                        <svg viewBox="0 0 400 148" preserveAspectRatio="none" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="ichingGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="rgba(88,245,184,0.22)"/>
+                                    <stop offset="100%" stop-color="rgba(77,232,255,0.18)"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="148" fill="url(#ichingGrad)"/>
+                            <rect x="118" y="38" width="164" height="10" rx="2" fill="rgba(88,245,184,0.75)"/>
+                            <rect x="118" y="58" width="70" height="10" rx="2" fill="rgba(255,94,200,0.65)"/>
+                            <rect x="212" y="58" width="70" height="10" rx="2" fill="rgba(255,94,200,0.65)"/>
+                            <rect x="118" y="78" width="164" height="10" rx="2" fill="rgba(88,245,184,0.75)"/>
+                            <rect x="118" y="98" width="70" height="10" rx="2" fill="rgba(255,94,200,0.65)"/>
+                            <rect x="212" y="98" width="70" height="10" rx="2" fill="rgba(255,94,200,0.65)"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-top">
+                            <span class="card-index">03</span>
+                            <span class="card-badge">I CHING</span>
                         </div>
                         <div class="card-name-en">Cyber Zhou Yi</div>
                         <div class="card-name-cn">赛博周易</div>
-                        <div class="card-desc">
-                            水墨玄学与赛博霓虹的终极融合。六十四卦演算、爻线推演、AI解卦，开启全息天机占卜之旅。
-                        </div>
-                        <div class="card-meta" aria-label="赛博周易功能摘要">
-                            <div class="meta-item">
-                                <span class="meta-label">流程</span>
-                                <span class="meta-value">六爻起卦</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">体验</span>
-                                <span class="meta-value">画符仪式</span>
-                            </div>
+                        <p class="card-desc">水墨玄学与赛博霓虹的终极融合。六十四卦演算、爻线推演与画符仪式，开启全息天机占卜之旅。</p>
+                        <div class="card-meta">
+                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value">六爻起卦</span></div>
+                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value">画符仪式</span></div>
                         </div>
                         <div class="card-tags">
                             <span class="tag">六十四卦</span>
                             <span class="tag">爻线推演</span>
                             <span class="tag">AI解卦</span>
-                            <span class="tag">画符仪式</span>
                         </div>
-                        <div class="card-cta">
-                            <span>进入易经殿堂</span>
-                            <span class="cta-arrow">→</span>
-                        </div>
+                        <div class="card-cta"><span>进入易经殿堂</span><span class="arrow">→</span></div>
                     </div>
                 </a>
-
             </div>
-        </div>
+        </section>
 
-        <!-- ========== FOOTER ========== -->
-        <footer>
-            <span class="footer-divider"></span>
+        <footer class="site-footer">
+            <span class="line"></span>
             玄机阁 · XUAN JI GE · 东方命理门户 · 2026
         </footer>
     </div>
 
-    <script>
-    /* ============================================================
-       1. Starfield Canvas
-    ============================================================ */
-    (function() {
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let W, H, stars = [], nebulae = [];
-
-        function resize() {
-            W = canvas.width = window.innerWidth;
-            H = canvas.height = window.innerHeight;
-        }
-
-        function randBetween(a, b) { return a + Math.random() * (b - a); }
-
-        function initStars() {
-            stars = [];
-            const count = Math.floor((W * H) / 3500);
-            for (let i = 0; i < count; i++) {
-                stars.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: randBetween(0.3, 1.6),
-                    alpha: randBetween(0.2, 0.9),
-                    speed: randBetween(0.0003, 0.001),
-                    phase: Math.random() * Math.PI * 2,
-                    color: Math.random() > 0.85
-                        ? `hsl(${200 + Math.random()*60},80%,80%)`
-                        : '#ffffff'
-                });
-            }
-            // Subtle nebula blobs
-            nebulae = [];
-            for (let i = 0; i < 5; i++) {
-                nebulae.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: randBetween(120, 280),
-                    hue: [270, 220, 45, 330, 170][i],
-                    alpha: randBetween(0.025, 0.06)
-                });
-            }
-        }
-
-        let raf, t = 0;
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
-
-            // Nebulae
-            nebulae.forEach(n => {
-                const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
-                g.addColorStop(0, `hsla(${n.hue},70%,45%,${n.alpha})`);
-                g.addColorStop(1, 'transparent');
-                ctx.fillStyle = g;
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            // Stars
-            t += 0.016;
-            stars.forEach(s => {
-                const a = s.alpha * (0.6 + 0.4 * Math.sin(t * s.speed * 1000 + s.phase));
-                ctx.save();
-                ctx.globalAlpha = a;
-                ctx.fillStyle = s.color;
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            });
-
-            raf = requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', () => { resize(); initStars(); });
-        resize(); initStars(); draw();
-    })();
-
-    /* ============================================================
-       2. Floating Runes
-    ============================================================ */
-    (function() {
-        const runes = ['☯','☽','☾','✦','⊕','⊗','⋮','⊙','∞','卍','乾','坤','坎','離','震','巽','艮','兌','☰','☱','☲','☳'];
-        const layer = document.getElementById('rune-layer');
-        const count = 22;
-        for (let i = 0; i < count; i++) {
-            const el = document.createElement('span');
-            el.className = 'bg-rune';
-            el.textContent = runes[i % runes.length];
-            el.style.left = (Math.random() * 98) + '%';
-            el.style.animationDuration = (18 + Math.random() * 30) + 's';
-            el.style.animationDelay = (-Math.random() * 40) + 's';
-            el.style.fontSize = (0.9 + Math.random() * 1.8) + 'rem';
-            layer.appendChild(el);
-        }
-    })();
-
-    /* ============================================================
-       3. Card Mouse-Parallax Tilt
-    ============================================================ */
-    document.querySelectorAll('.portal-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const cx = rect.left + rect.width / 2;
-            const cy = rect.top + rect.height / 2;
-            const dx = (e.clientX - cx) / (rect.width / 2);
-            const dy = (e.clientY - cy) / (rect.height / 2);
-            card.style.transform = `translateY(-10px) scale(1.015) rotateX(${-dy * 4}deg) rotateY(${dx * 4}deg)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-    </script>
+    <script src="./assets/portal.js"></script>
 </body>
 </html>

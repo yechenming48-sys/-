@@ -1,0 +1,41 @@
+.back-home-btn {
+    position: fixed;
+    top: 22px;
+    left: 22px;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 6, 28, 0.62);
+    backdrop-filter: blur(16px);
+    color: rgba(240, 236, 255, 0.72);
+    text-decoration: none;
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    transition: transform 0.28s ease, border-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.back-home-btn:hover {
+    transform: translateX(-3px);
+    color: #ffe7a8;
+    border-color: rgba(232, 200, 114, 0.35);
+    box-shadow: 0 12px 34px rgba(232, 200, 114, 0.16);
+}
+
+.back-home-btn:focus-visible {
+    outline: 2px solid #ffe7a8;
+    outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+    .back-home-btn {
+        top: 14px;
+        left: 14px;
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
+}
