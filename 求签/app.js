@@ -381,6 +381,7 @@ function summonChartSequence(chartData) {
   document.getElementById("calc-form-box").style.display = "none";
   document.getElementById("chart-result-box").style.display = "block";
   clearSanFangSiZheng();
+  renderZiweiPlainSpeak();
 
   // 1. 获取所有单元格并初始设置为不可见
   const cells = [];

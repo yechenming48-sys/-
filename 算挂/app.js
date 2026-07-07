@@ -861,16 +861,17 @@ const App = {
 
     startAITyping(result, hexMeta = {}) {
         const consoleBody = document.getElementById('console-text-body');
-        consoleBody.innerHTML = '<div class="plain-speak-wrap" id="plain-speak-output"></div>';
+        consoleBody.innerHTML = '';
 
-        if (window.PlainSpeak) {
+        const plainEl = document.getElementById('plain-speak-output');
+        if (window.PlainSpeak && plainEl) {
             const scores = window.PlainSpeak.scoresFromSeed(
                 (hexMeta.hexCode || '') + (hexMeta.changeCode || '') + this.divination.question
             );
             const topicScore = scores[this.divination.category] || scores.general;
             scores[this.divination.category] = Math.round((topicScore + (result.judgment.length % 20)) / 2 + 25);
 
-            window.PlainSpeak.render(document.getElementById('plain-speak-output'), {
+            window.PlainSpeak.render(plainEl, {
                 question: this.divination.question,
                 category: this.divination.category,
                 scores,
@@ -985,6 +986,13 @@ const App = {
         document.getElementById('cast-count').textContent = '0';
         document.getElementById('btn-cast-coin').textContent = '掷铜钱（投三次）';
         document.getElementById('btn-cast-coin').removeAttribute('disabled');
+
+        const plainEl = document.getElementById('plain-speak-output');
+        if (plainEl) {
+            plainEl.innerHTML = '';
+            plainEl.classList.remove('plain-speak-visible');
+        }
+        document.getElementById('console-text-body').innerHTML = '';
 
         // 切回主界面
         this.switchScreen('screen-intro');

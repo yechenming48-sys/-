@@ -3,6 +3,38 @@
     margin-bottom: 1rem;
 }
 
+.plain-speak-chart-top {
+    margin: 0 0 1.25rem;
+    max-width: 100%;
+}
+
+.plain-speak-panel {
+    max-height: none;
+    margin-bottom: 0.5rem;
+}
+
+.console-body-plain {
+    padding: 1rem 1.1rem;
+    min-height: 0;
+    max-height: 42vh;
+    overflow-y: auto;
+}
+
+.console-body-plain:empty {
+    display: none;
+}
+
+.console-header-secondary {
+    margin-top: 0.35rem;
+    opacity: 0.92;
+}
+
+.panel-header-secondary {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .plain-speak-wrap:empty {
     display: none;
     margin: 0;

@@ -769,13 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tarotPromptText.textContent = "已感应神谕！正在译码天机...";
 
             if (window.PlainSpeak) {
-                window.PlainSpeak.render(document.getElementById('plain-speak-output'), {
-                    question: savedUserQuestion,
-                    category: userReport.category,
-                    scores: userReport.scores,
-                    signals: { positive: clickedCard.isUpright },
-                    seedText: userNameInput + savedBirthDate + clickedCard.tarot.name
-                });
+                renderPlainSpeak({ positive: clickedCard.isUpright });
             }
 
             // Compile AI Oracle reading based on chosen card
@@ -928,6 +922,8 @@ document.addEventListener('DOMContentLoaded', () => {
         userZodiac = zodiac;
         userReport = report;
 
+        renderPlainSpeak();
+
         // Reset visual card parameters
         cardContainers.forEach((container, i) => {
             container.classList.remove('flipped', 'dimmed', 'selected');
@@ -997,6 +993,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let compiledOracleText = '';
+
+    function renderPlainSpeak(signals = {}) {
+        if (!window.PlainSpeak || !userReport) return;
+        window.PlainSpeak.render(document.getElementById('plain-speak-output'), {
+            question: savedUserQuestion,
+            category: userReport.category,
+            scores: userReport.scores,
+            signals,
+            seedText: userNameInput + savedBirthDate
+        });
+    }
 
     // Create custom mystical text
     function compileOracleSpeech(name, zodiac, chosenCard, report) {
