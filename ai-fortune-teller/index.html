@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../assets/atmosphere.css">
     <link rel="stylesheet" href="../assets/themes.css">
+    <link rel="stylesheet" href="../assets/plain-speak.css">
 </head>
 <body class="theme-oracle">
     <!-- Background Canvas for Particles -->
@@ -156,6 +157,15 @@
                                 <div class="zodiac-badge" id="zodiac-badge">
                                     <span id="zodiac-text">自动测算星轨...</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Optional question -->
+                        <div class="input-group">
+                            <label for="user-question">具体想问的事（可选）</label>
+                            <div class="input-wrapper">
+                                <i class="fa-regular fa-comment-dots input-icon"></i>
+                                <input type="text" id="user-question" placeholder="例如：我今年会不会遇到真爱？">
                             </div>
                         </div>
 
@@ -415,6 +425,7 @@
                             <h3>AI 命运神谕</h3>
                         </div>
                         <div class="oracle-output-container">
+                            <div class="plain-speak-wrap" id="plain-speak-output"></div>
                             <!-- Typewriter effect content container -->
                             <div class="oracle-text" id="oracle-text-output"></div>
                             <span class="cursor" id="oracle-cursor">|</span>
@@ -442,6 +453,7 @@
     <audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
 
     <script src="../assets/atmosphere.js"></script>
+    <script src="../assets/plain-speak.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
 </body>

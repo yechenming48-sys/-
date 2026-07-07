@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="../assets/atmosphere.css">
   <link rel="stylesheet" href="../assets/themes.css">
+  <link rel="stylesheet" href="../assets/plain-speak.css">
 </head>
 <body class="theme-ziwei">
 
@@ -529,6 +530,17 @@
             </div>
           </div>
 
+          <!-- 6.5 具体想问的事 -->
+          <div class="pact-form-row">
+            <div class="pact-form-group">
+              <label class="pact-label">具体想问的事（可选）</label>
+              <div class="pact-input-wrapper">
+                <svg class="pact-input-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+                <input type="text" id="pactQuestion" placeholder="例如：我今年会不会遇到真爱？">
+              </div>
+            </div>
+          </div>
+
           <!-- 7. 契约提交 -->
           <div class="pact-form-actions">
             <button type="submit" class="btn-pact-summon">
@@ -592,6 +604,7 @@
               <h3>点击命盘宫位查看详解</h3>
               <p>在左侧命盘中，点击任意十二宫的格子，此处将实时载入针对您星盘该领域主星曜、辅星以及生年四化的深度命理学解析。</p>
             </div>
+            <div class="plain-speak-wrap" id="plain-speak-output"></div>
             <div class="explanation-content" id="exp-content" style="display: none;"></div>
           </div>
         </div>
@@ -608,6 +621,7 @@
 
   <!-- 引入逻辑脚本 -->
   <script src="../assets/atmosphere.js"></script>
+  <script src="../assets/plain-speak.js"></script>
   <script src="lunar.js"></script>
   <script src="interpretations.js"></script>
   <script src="app.js"></script>

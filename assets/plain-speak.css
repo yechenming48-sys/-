@@ -1,0 +1,143 @@
+/* 说人话区 — 直白解读卡片 */
+.plain-speak-wrap {
+    margin-bottom: 1rem;
+}
+
+.plain-speak-wrap:empty {
+    display: none;
+    margin: 0;
+}
+
+.plain-speak-card {
+    position: relative;
+    padding: 1.1rem 1.15rem 1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.22));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    animation: plain-speak-in 0.45s ease-out both;
+}
+
+.plain-speak-card.prob-high {
+    border-color: rgba(120, 255, 180, 0.28);
+    background: linear-gradient(145deg, rgba(80, 200, 140, 0.1), rgba(0, 0, 0, 0.2));
+}
+
+.plain-speak-card.prob-mid {
+    border-color: rgba(255, 210, 120, 0.28);
+    background: linear-gradient(145deg, rgba(255, 190, 80, 0.08), rgba(0, 0, 0, 0.2));
+}
+
+.plain-speak-card.prob-low {
+    border-color: rgba(255, 140, 140, 0.22);
+    background: linear-gradient(145deg, rgba(255, 100, 100, 0.06), rgba(0, 0, 0, 0.2));
+}
+
+@keyframes plain-speak-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.plain-speak-header {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.65rem;
+}
+
+.plain-speak-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #101018;
+    background: linear-gradient(90deg, #ffe9a8, #ffc86b);
+    box-shadow: 0 0 16px rgba(255, 200, 100, 0.25);
+}
+
+.plain-speak-tag {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.plain-speak-question {
+    margin: 0 0 0.75rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+    font-weight: 500;
+}
+
+.plain-speak-verdict {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.plain-speak-prob {
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.prob-high .plain-speak-prob { color: #7dffb0; }
+.prob-mid .plain-speak-prob { color: #ffd56a; }
+.prob-low .plain-speak-prob { color: #ff9a9a; }
+
+.plain-speak-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.plain-speak-body {
+    margin: 0 0 0.7rem;
+    font-size: 0.88rem;
+    line-height: 1.72;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.plain-speak-tip {
+    margin: 0;
+    padding-top: 0.55rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* 主题微调 */
+body.theme-oracle .plain-speak-card {
+    border-color: rgba(255, 94, 200, 0.18);
+}
+
+body.theme-ziwei .plain-speak-card {
+    border-color: rgba(180, 140, 255, 0.2);
+}
+
+body.theme-iching .plain-speak-card {
+    border-color: rgba(0, 240, 255, 0.18);
+}
+
+body.theme-iching .plain-speak-badge {
+    background: linear-gradient(90deg, #a8fff5, #00f0ff);
+    color: #031418;
+}
+
+@media (max-width: 640px) {
+    .plain-speak-prob {
+        font-size: 1.4rem;
+    }
+}

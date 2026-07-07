@@ -465,6 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let userNameInput = '';
     let userZodiac = null;
     let userReport = null;
+    let savedUserQuestion = '';
 
     // AI Oracle Typewriter
     const oracleTextOutput = document.getElementById('oracle-text-output');
@@ -674,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         savedUserName = document.getElementById('user-name').value.trim();
         savedBirthDate = birthDateInput.value;
+        savedUserQuestion = (document.getElementById('user-question')?.value || '').trim();
 
         if (!savedUserName || !savedBirthDate) return;
 
@@ -715,6 +717,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typewriterInterval) clearInterval(typewriterInterval);
         oracleTextOutput.textContent = '';
         oracleCursor.style.display = 'inline-block';
+        const plainSpeakEl = document.getElementById('plain-speak-output');
+        if (plainSpeakEl) {
+            plainSpeakEl.innerHTML = '';
+            plainSpeakEl.classList.remove('plain-speak-visible');
+        }
 
         switchScreen(screenResults, screenInput);
     });
@@ -760,6 +767,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             tarotPromptText.textContent = "已感应神谕！正在译码天机...";
+
+            if (window.PlainSpeak) {
+                window.PlainSpeak.render(document.getElementById('plain-speak-output'), {
+                    question: savedUserQuestion,
+                    category: userReport.category,
+                    scores: userReport.scores,
+                    signals: { positive: clickedCard.isUpright },
+                    seedText: userNameInput + savedBirthDate + clickedCard.tarot.name
+                });
+            }
 
             // Compile AI Oracle reading based on chosen card
             compileOracleSpeech(userNameInput, userZodiac, clickedCard, userReport);

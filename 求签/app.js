@@ -349,9 +349,32 @@ function resetForm() {
   document.getElementById("chart-result-box").style.display = "none";
   document.getElementById("calc-form-box").style.display = "block";
   clearSanFangSiZheng();
+  const plainEl = document.getElementById("plain-speak-output");
+  if (plainEl) {
+    plainEl.innerHTML = "";
+    plainEl.classList.remove("plain-speak-visible");
+  }
 }
 
 window.resetForm = resetForm;
+
+function renderZiweiPlainSpeak() {
+  const el = document.getElementById("plain-speak-output");
+  if (!el || !window.PlainSpeak) return;
+
+  const question = (document.getElementById("pactQuestion")?.value || "").trim();
+  const category = document.getElementById("pactQuest")?.value || "general";
+  const name = (document.getElementById("username")?.value || "").trim();
+  const birthDate = document.getElementById("birthDate")?.value || "";
+  const scores = window.PlainSpeak.scoresFromSeed(name + birthDate + category);
+
+  window.PlainSpeak.render(el, {
+    question,
+    category,
+    scores,
+    seedText: name + birthDate + category
+  });
+}
 
 // 星盘仪式召唤动画（星盘觉醒）
 function summonChartSequence(chartData) {
@@ -416,6 +439,7 @@ function summonChartSequence(chartData) {
         targetCell.click();
       }
     }
+    renderZiweiPlainSpeak();
   }, 12 * 60 + 350);
 
   window.scrollTo({ top: 0, behavior: 'smooth' });

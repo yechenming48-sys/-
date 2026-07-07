@@ -388,7 +388,9 @@ const App = {
     divination: {
         castCount: 0,   // 当前投掷次数 (最大6)
         casts: [],      // 六爻投掷结果记录: 6=老阴, 7=少阳, 8=少阴, 9=老阳
-        isCasting: false
+        isCasting: false,
+        question: '',
+        category: 'general'
     },
 
     particleSystem: null,
@@ -684,6 +686,11 @@ const App = {
 
     // 确认起卦并切换界面
     startDivinationCasting() {
+        const questionEl = document.getElementById('input-question');
+        const categoryEl = document.getElementById('select-category');
+        this.divination.question = questionEl ? questionEl.value.trim() : '';
+        this.divination.category = categoryEl && categoryEl.value ? categoryEl.value : 'general';
+
         if (this.drawing.points.length > 0) {
             this.dissolveTalisman();
             this.drawing.points = [];
@@ -849,12 +856,31 @@ const App = {
         audio.playBell(392.00, 3.5); // G4 磬声，震荡人心
 
         // 启动右侧控制台的 AI 打字机
-        this.startAITyping(result);
+        this.startAITyping(result, { hexCode, changeCode });
     },
 
-    startAITyping(result) {
+    startAITyping(result, hexMeta = {}) {
         const consoleBody = document.getElementById('console-text-body');
-        consoleBody.innerHTML = ''; // 清空
+        consoleBody.innerHTML = '<div class="plain-speak-wrap" id="plain-speak-output"></div>';
+
+        if (window.PlainSpeak) {
+            const scores = window.PlainSpeak.scoresFromSeed(
+                (hexMeta.hexCode || '') + (hexMeta.changeCode || '') + this.divination.question
+            );
+            const topicScore = scores[this.divination.category] || scores.general;
+            scores[this.divination.category] = Math.round((topicScore + (result.judgment.length % 20)) / 2 + 25);
+
+            window.PlainSpeak.render(document.getElementById('plain-speak-output'), {
+                question: this.divination.question,
+                category: this.divination.category,
+                scores,
+                signals: {
+                    hasChange: hexMeta.hexCode !== hexMeta.changeCode,
+                    positive: /元亨利贞|吉/.test(result.judgment)
+                },
+                seedText: (hexMeta.hexCode || '') + this.divination.question
+            });
+        }
 
         // 结构化需要输出的各个模块
         const sections = [
@@ -951,7 +977,9 @@ const App = {
         this.divination = {
             castCount: 0,
             casts: [],
-            isCasting: false
+            isCasting: false,
+            question: '',
+            category: 'general'
         };
         document.getElementById('yao-lines').innerHTML = '';
         document.getElementById('cast-count').textContent = '0';
