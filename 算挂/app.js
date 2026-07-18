@@ -369,14 +369,14 @@ function renderIChingPlainSpeak(targetEl, context) {
         <div class="plain-speak-card prob-mid">
             <div class="plain-speak-header">
                 <span class="plain-speak-badge">说人话</span>
-                <span class="plain-speak-tag">直白解读 · 仅供参考</span>
+                <span class="plain-speak-tag">毒舌直说 · 不负责哄你</span>
             </div>
             <p class="plain-speak-question">你问：${question}</p>
             <div class="plain-speak-verdict">
                 <span class="plain-speak-prob">${prob}%</span>
                 <span class="plain-speak-label">${label}</span>
             </div>
-            <p class="plain-speak-body">卦象已经出来了，整体趋势${prob >= 60 ? '偏顺' : '平平'}。别想太复杂，该行动就行动，该等就等。</p>
+            <p class="plain-speak-body">卦象出来了，整体${prob >= 60 ? '偏顺——别糟践这点运气' : '平平——别硬冲装勇敢'}。想太多没用，该动就动，该等就等。</p>
         </div>
     `;
     targetEl.classList.add('plain-speak-visible');
@@ -942,7 +942,7 @@ const App = {
                 finishText.style.color = 'var(--neon-gold)';
                 finishText.style.marginTop = '20px';
                 finishText.style.fontStyle = 'italic';
-                finishText.textContent = '—— 天机已泄，凝神结缘。';
+                finishText.textContent = '—— 天机写完了。听不听随你，别说没提醒过。';
                 consoleBody.appendChild(finishText);
                 consoleBody.scrollTop = consoleBody.scrollHeight;
                 return;

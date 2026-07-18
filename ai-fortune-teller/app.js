@@ -1013,38 +1013,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const advice = chosenCard.isUpright ? t.upright.advice : t.reversed.advice;
 
         const introTemplates = [
-            `探索者【${name}】，AI 读取到了属于您的星轨引力子纠缠。作为出生于【${zodiac.name}】的个体，您的守护星【${zodiac.ruler}】正处于今日星空的相位焦点。`,
-            `当契约签订，宇宙微波背景辐射中映现出了您【${name}】的意识印记。在这一刻，【${zodiac.name}】星群的引力场正与您的个人频率形成深层交织。`
+            `【${name}】，星盘读完了。你是【${zodiac.name}】，守护星【${zodiac.ruler}】今天挺忙——忙着照见你那些还没想清楚的事。别急着感动，先听完。`,
+            `契约生效。【${name}】，【${zodiac.name}】的相位已经对上了：不是宇宙突然偏爱你，是你终于肯认真问一次。`
         ];
 
         const relationTemplates = {
-            general: `针对您所询问的【综合运势】：今日您的星盘能量指数为 ${report.starIndex}%，这意味着生命中的各项齿轮正在以一种微妙且和谐的速度扣合。`,
-            love: `针对您所探寻的【恋爱情感】：守护星【${zodiac.ruler}】的电磁扰动正注入您的情感宫位，今日的情感共鸣指数达到 ${report.scores.love}%。`,
-            career: `针对您所探寻的【事业学业】：代表秩序与实践的土星势能正在整合，使得您的学识与行动频率产生了高达 ${report.scores.career}% 的同频共鸣。`,
-            wealth: `针对您所探寻的【财富走势】：今日水星相位在偏财宫形成了一次金色的三角投射，指引您星轨的物质丰收频段在 ${report.scores.wealth}% 盘旋。`,
-            health: `针对您所探寻的【健康指引】：生命体征的能量环今日表现平稳，星宿电磁频段共鸣度在 ${report.scores.health}% 附近维持稳定。`
+            general: `你问的是【综合运势】。今日星盘指数 ${report.starIndex}%——数字好看不代表你躺着就能赢，齿轮咬合得再顺，你不踩油门也白搭。`,
+            love: `你问的是【恋爱情感】。共鸣指数 ${report.scores.love}%。守护星【${zodiac.ruler}】往情感宫砸了一脚——机会有没有另说，你敢不敢接才是重点。`,
+            career: `你问的是【事业学业】。同频度 ${report.scores.career}%。土星不吃「我努力了」这种空话，吃结果。该冲就冲，别光自我感动。`,
+            wealth: `你问的是【财富走势】。物质频段 ${report.scores.wealth}%。金色三角听着漂亮，手还是别往高风险里乱伸——财运帮懒人，不帮赌徒。`,
+            health: `你问的是【健康指引】。共鸣度 ${report.scores.health}%。平稳不等于你可以继续作。身体记账很准，熬夜、内耗它都会算利息。`
         };
 
         const outText = relationTemplates[report.category] || relationTemplates['general'];
 
-        compiledOracleText = `🌌 AI 命运神谕契约达成 🌌
+        compiledOracleText = `🌌 AI 命运神谕 · 毒舌版 🌌
 
 ${introTemplates[Math.floor(Math.random() * introTemplates.length)]}
 
 ${outText}
 
-在本轮命运指引中，您亲手感应并抽取的塔罗牌是：
+本轮你抽到的是：
 💎【${t.name} • ${stateStr}】
 
-这预示着当前阶段的能量映射为：
+直说：
 “${meaning}”
 
-🌟 AI 命运指引给您的启示：
+🌟 别装没听见：
 ${advice}
 
-【今日灵觉护身符】
+【今日护身符】
 幸运数字：${report.luckyNum} | 幸运色彩：${zodiac.color}
-「宇宙的随机性并非无序，所有的选择，皆是宿命的指引。」`;
+「选择是你的。抱怨留给下次抽逆位的自己。」`;
     }
 
     // Reveal output via Typewriter effect
