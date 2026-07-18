@@ -372,7 +372,7 @@ function renderIChingPlainSpeak(targetEl, context) {
                 <span class="plain-speak-prob">${prob}%</span>
                 <span class="plain-speak-label">${label}</span>
             </div>
-            <p class="plain-speak-body">卦象出来了，整体${prob >= 60 ? '偏顺——糟践了就活该' : '平平——硬冲纯属作死'}。想太多没用，该动就动，该等就等，别逼逼。</p>
+            <p class="plain-speak-body">行吧直说了：卦象出来了，整体${prob >= 60 ? '偏顺——你要是还糟践，那真活该' : '平平——硬冲多半是作死'}。想太多没用，该动就动，该等就等。别把算一卦当心理按摩，按摩完该怂还怂，我懒得哄你。</p>
         </div>
     `;
     targetEl.classList.add('plain-speak-visible');
