@@ -417,6 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const screenDraw = document.getElementById('screen-draw');
     const screenLoading = document.getElementById('screen-loading');
     const screenResults = document.getElementById('screen-results');
+    const screenOracle = document.getElementById('screen-oracle');
 
     const btnEnter = document.getElementById('btn-enter');
     const btnRestart = document.getElementById('btn-restart');
@@ -723,7 +724,8 @@ document.addEventListener('DOMContentLoaded', () => {
             plainSpeakEl.classList.remove('plain-speak-visible');
         }
 
-        switchScreen(screenResults, screenInput);
+        const fromScreen = screenOracle.classList.contains('active') ? screenOracle : screenResults;
+        switchScreen(fromScreen, screenInput);
     });
 
     // Bind click events on all 3 cards
@@ -766,21 +768,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.particleSystem.createBurst(centerX, centerY, 25, 'gold');
             }
 
-            tarotPromptText.textContent = "已感应神谕！正在译码天机...";
+            tarotPromptText.textContent = "已选中。正在进入解读…";
 
-            if (window.PlainSpeak) {
-                renderPlainSpeak({ positive: clickedCard.isUpright });
-            }
-
-            // Compile AI Oracle reading based on chosen card
+            // Compile reading, then jump to interpretation screen
             compileOracleSpeech(userNameInput, userZodiac, clickedCard, userReport);
 
-            // Trigger typing effect
             setTimeout(() => {
-                revealOracleReading();
-            }, 800);
+                openOracleStage(clickedCard);
+            }, 900);
         });
     });
+
+    function openOracleStage(clickedCard) {
+        const artEl = document.getElementById('chosen-card-art');
+        const nameEl = document.getElementById('chosen-card-name');
+        const stateEl = document.getElementById('chosen-card-state');
+        const oracleName = document.getElementById('oracle-res-name');
+        const oracleZodiac = document.getElementById('oracle-res-zodiac');
+
+        if (artEl) {
+            artEl.innerHTML = '';
+            renderProceduralTarot(artEl, clickedCard.tarot, clickedCard.isUpright);
+        }
+        if (nameEl) nameEl.textContent = clickedCard.tarot.name;
+        if (stateEl) {
+            stateEl.textContent = clickedCard.isUpright ? '正位' : '逆位';
+            stateEl.className = clickedCard.isUpright ? 'tarot-state' : 'tarot-state reversed';
+        }
+        if (oracleName) oracleName.textContent = userNameInput || '探索者';
+        if (oracleZodiac) oracleZodiac.textContent = userZodiac ? userZodiac.name : '';
+
+        if (typewriterInterval) clearInterval(typewriterInterval);
+        oracleTextOutput.textContent = '';
+        oracleCursor.style.display = 'inline-block';
+
+        switchScreen(screenResults, screenOracle);
+
+        setTimeout(() => {
+            renderPlainSpeak({ positive: clickedCard.isUpright });
+            revealOracleReading();
+            screenOracle.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 450);
+    }
 
     // Share button
     btnShare.addEventListener('click', () => {
@@ -922,7 +952,15 @@ document.addEventListener('DOMContentLoaded', () => {
         userZodiac = zodiac;
         userReport = report;
 
-        renderPlainSpeak();
+        // Interpretation waits until a tarot card is chosen
+        const plainSpeakEl = document.getElementById('plain-speak-output');
+        if (plainSpeakEl) {
+            plainSpeakEl.innerHTML = '';
+            plainSpeakEl.classList.remove('plain-speak-visible');
+        }
+        if (typewriterInterval) clearInterval(typewriterInterval);
+        oracleTextOutput.textContent = '';
+        oracleCursor.style.display = 'inline-block';
 
         // Reset visual card parameters
         cardContainers.forEach((container, i) => {

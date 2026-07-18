@@ -421,24 +421,41 @@
                         <p class="tarot-prompt" id="tarot-prompt-text">感应内心共鸣，点击选择一张命运塔罗</p>
                     </div>
 
-                    <!-- Right Column: AI Oracle Output -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. INTERPRETATION SCREEN (after tarot pick) -->
+        <section class="screen" id="screen-oracle">
+            <div class="content-wrapper results-wrapper oracle-stage-wrapper">
+                <div class="oracle-stage-grid">
+                    <div class="result-card glass-card chosen-card-panel premium-frame fade-in-left">
+                        <p class="section-subtitle">你选中的牌</p>
+                        <div class="chosen-card-preview" id="chosen-card-preview">
+                            <div class="chosen-card-art" id="chosen-card-art"></div>
+                            <h3 id="chosen-card-name">—</h3>
+                            <span class="tarot-state" id="chosen-card-state">正位</span>
+                        </div>
+                        <p class="res-subtitle" style="margin-top: 1rem;">
+                            <span id="oracle-res-name">探索者</span> · <span id="oracle-res-zodiac">白羊座</span>
+                        </p>
+                    </div>
+
                     <div class="result-card glass-card oracle-panel premium-frame fade-in-right">
                         <div class="oracle-output-container plain-speak-panel">
                             <div class="plain-speak-wrap" id="plain-speak-output"></div>
                         </div>
                         <div class="panel-header panel-header-secondary">
                             <i class="fa-solid fa-microchip"></i>
-                            <h3>AI 命运神谕</h3>
+                            <h3>命运解读</h3>
                         </div>
                         <div class="oracle-output-container">
-                            <!-- Typewriter effect content container -->
                             <div class="oracle-text" id="oracle-text-output"></div>
                             <span class="cursor" id="oracle-cursor">|</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Footer Operations -->
                 <div class="results-actions text-center fade-in-up">
                     <button class="btn btn-secondary" id="btn-restart">
                         <i class="fa-solid fa-arrow-rotate-left"></i>
