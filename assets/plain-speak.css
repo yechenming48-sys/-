@@ -135,19 +135,20 @@
 }
 
 .plain-speak-body {
-    margin: 0 0 0.7rem;
-    font-size: 0.88rem;
-    line-height: 1.72;
-    color: rgba(255, 255, 255, 0.72);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.plain-speak-body br {
+    content: '';
+    display: block;
+    margin-top: 0.55em;
 }
 
 .plain-speak-tip {
-    margin: 0;
-    padding-top: 0.55rem;
-    border-top: 1px dashed rgba(255, 255, 255, 0.1);
-    font-size: 0.8rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.55);
+    display: none;
 }
 
 /* 主题微调 */
