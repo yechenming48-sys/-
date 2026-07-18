@@ -367,11 +367,7 @@ function renderIChingPlainSpeak(targetEl, context) {
     const label = prob >= 70 ? '大概率会' : prob >= 55 ? '有机会' : '一半一半';
     targetEl.innerHTML = `
         <div class="plain-speak-card prob-mid">
-            <div class="plain-speak-header">
-                <span class="plain-speak-badge">说人话</span>
-                <span class="plain-speak-tag">毒舌直说 · 不负责哄你</span>
-            </div>
-            <p class="plain-speak-question">你问：${question}</p>
+            <p class="plain-speak-question">${question}</p>
             <div class="plain-speak-verdict">
                 <span class="plain-speak-prob">${prob}%</span>
                 <span class="plain-speak-label">${label}</span>

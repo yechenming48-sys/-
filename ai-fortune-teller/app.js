@@ -1027,24 +1027,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const outText = relationTemplates[report.category] || relationTemplates['general'];
 
-        compiledOracleText = `🌌 AI 命运神谕 · 毒舌版 🌌
-
-${introTemplates[Math.floor(Math.random() * introTemplates.length)]}
+        compiledOracleText = `${introTemplates[Math.floor(Math.random() * introTemplates.length)]}
 
 ${outText}
 
-本轮你抽到的是：
-💎【${t.name} • ${stateStr}】
+你抽到的是【${t.name} · ${stateStr}】。
 
-直说：
-“${meaning}”
+${meaning}
 
-🌟 别装没听见：
-${advice}
+别装没听见：${advice}
 
-【今日护身符】
-幸运数字：${report.luckyNum} | 幸运色彩：${zodiac.color}
-「选择是你的。抱怨留给下次抽逆位的自己。」`;
+幸运数字 ${report.luckyNum}，幸运色 ${zodiac.color}。选择是你的，别回头怪牌。`;
     }
 
     // Reveal output via Typewriter effect

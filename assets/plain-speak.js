@@ -294,17 +294,13 @@
 
         container.innerHTML = `
             <div class="plain-speak-card ${probClass}">
-                <div class="plain-speak-header">
-                    <span class="plain-speak-badge">说人话</span>
-                    <span class="plain-speak-tag">毒舌直说 · 不负责哄你</span>
-                </div>
-                <p class="plain-speak-question">你问：${escapeHtml(data.question)}</p>
+                <p class="plain-speak-question">${escapeHtml(data.question)}</p>
                 <div class="plain-speak-verdict">
                     <span class="plain-speak-prob">${data.probability}%</span>
                     <span class="plain-speak-label">${escapeHtml(data.label)}</span>
                 </div>
                 <p class="plain-speak-body">${escapeHtml(data.body)}</p>
-                <p class="plain-speak-tip">💡 ${escapeHtml(data.tip)}</p>
+                <p class="plain-speak-tip">${escapeHtml(data.tip)}</p>
             </div>
         `;
         container.classList.add('plain-speak-visible');
