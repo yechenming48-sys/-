@@ -49,9 +49,10 @@
 
     function detectQuestionType(question) {
         const q = (question || '').trim();
-        if (/会不会|能不能|是否|有没有|行吗|好吗|适合吗|能成吗|会成吗/.test(q)) return 'yesno';
-        if (/什么时候|何时|几月|哪天|多久|今年|明年|下半年|上半年/.test(q)) return 'when';
-        if (/怎么样|如何|咋样|好不好/.test(q)) return 'how';
+        if (/是不是|算不算|会不会|能不能|该不该|要不要|是否|有没有|行吗|好吗|适合吗|能成吗|会成吗|可不可以|行不行|对不对|值不值得/.test(q)) return 'yesno';
+        if (/什么时候|何时|几月|哪天|多久/.test(q)) return 'when';
+        if (/怎么样|如何|咋样|好不好|怎么办/.test(q)) return 'how';
+        if (/今年|明年|下半年|上半年/.test(q) && /吗|么|呢/.test(q)) return 'yesno';
         return 'open';
     }
 
@@ -111,7 +112,7 @@
 
     // 具体意图：先吃关键词，避免答非所问（例如「我是不是舔狗」必须答舔狗，不答泛泛桃花）
     const INTENT_RULES = [
-        { id: 'lickdog', topic: 'love', words: ['舔狗', '备胎', '跪舔', '舔来舔去', '卑微付出'], re: /是不是舔|算不算舔|我是舔|我在舔|算不算备胎|是不是备胎|我太卑微/ },
+        { id: 'lickdog', topic: 'love', words: ['舔狗', '备胎', '跪舔', '舔来舔去', '卑微付出', '舔人', '太舔'], re: /是不是舔|算不算舔|我是舔|我在舔|算不算备胎|是不是备胎|我太卑微|有点舔|太舔了|我舔吗|我很舔/ },
         { id: 'scum', topic: 'love', words: ['渣男', '渣女', '海王', '海后', '渣吗'], re: /是不是渣|算不算渣|渣男|渣女|他渣|她渣|绿了|出轨|劈腿/ },
         { id: 'lovebrain', topic: 'love', words: ['恋爱脑', '恋爱至上'], re: /恋爱脑|是不是恋爱|我太爱了|爱得太傻/ },
         { id: 'whitemoon', topic: 'love', words: ['白月光', '朱砂痣', '替身'], re: /白月光|朱砂痣|替身|放不下那个人/ },
@@ -1014,6 +1015,92 @@
         return pickVariant(low, seed);
     }
 
+    // 直答第一句：必须点题，禁止开场套话跑题
+    function buildDirectHit(q, intent, label, prob, qType) {
+        const quoted = '「' + q + '」';
+        if (intent) {
+            const id = intent.id;
+            if (id === 'lickdog') {
+                if (prob >= 70) return '你问' + quoted + '——直说：是，味儿挺冲。' + label + '。下面只谈你有没有在跪，不谈什么桃花真爱。';
+                if (prob >= 50) return '你问' + quoted + '——直说：临界了，再跪就实锤。' + label + '。别指望我给你讲今年姻缘，你问的是舔不舔。';
+                return '你问' + quoted + '——直说：还没实锤，但别往那走。' + label + '。答案就围着「舔狗/备胎」讲。';
+            }
+            if (id === 'scum') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。只评对方渣不渣、值不值得继续，不扯别的运势。';
+            }
+            if (id === 'confess') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。就说表白/开口这件事，成不成、该不该，别的少提。';
+            }
+            if (id === 'breakup') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。只谈分不分、该不该止损。';
+            }
+            if (id === 'ex') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。只谈前任/复合/回头，不给你灌鸡汤。';
+            }
+            if (id === 'ghost') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。已读、冷处理、回不回，按这个说。';
+            }
+            if (id === 'chase') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。追不追、怎么追、该不该停，就这事。';
+            }
+            if (id === 'crush') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。暗恋/单相思浓度，按你的原话答。';
+            }
+            if (id === 'lovebrain') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。就评你是不是恋爱脑，别的少扯。';
+            }
+            if (id === 'whitemoon') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。白月光/放不下，按这个讲。';
+            }
+            if (id === 'reject') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。有没有戏、拒没拒，说清楚。';
+            }
+            if (id === 'ldr') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。异地能不能撑、奔现靠不靠谱。';
+            }
+            if (id === 'marry') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。结婚/领证这事，现实对齐了没。';
+            }
+            if (id === 'single') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。脱单有没有戏，就答这个。';
+            }
+            if (id === 'job_switch' || id === 'quit' || id === 'interview' || id === 'raise' || id === 'exam') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。事业/学业按你的原话回，不讲感情线。';
+            }
+            if (id === 'getrich' || id === 'invest' || id === 'broke' || id === 'spend') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。钱的事按你问的答，不绕。';
+            }
+            if (id === 'sleep' || id === 'anxiety') {
+                return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。身体/心态按原话讲。';
+            }
+            return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。下面只围绕你的问题说。';
+        }
+
+        // 无明确意图：也必须先点题，禁止一上来讲无关套话
+        if (qType === 'yesno') {
+            return '你问' + quoted + '——直答：' + label + '，把握大概 ' + prob + '%。我按你的原话回，不答成别的题。';
+        }
+        if (qType === 'when') {
+            return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。时间节奏下面说，先别跳到无关话题。';
+        }
+        return '你问' + quoted + '——直答：' + label + '（' + prob + '%）。先听跟你问题有关的部分。';
+    }
+
+    function echoKeywords(q) {
+        const hits = [];
+        const bag = [].concat(
+            TOPIC_KEYWORDS.love,
+            TOPIC_KEYWORDS.career,
+            TOPIC_KEYWORDS.wealth,
+            TOPIC_KEYWORDS.health
+        );
+        for (const w of bag) {
+            if (w.length >= 2 && q.includes(w) && hits.indexOf(w) === -1) hits.push(w);
+            if (hits.length >= 4) break;
+        }
+        return hits;
+    }
+
     function generate(context) {
         const {
             question = '',
@@ -1023,19 +1110,20 @@
             seedText = ''
         } = context;
 
-        const displayQuestion = (question || '').trim() || DEFAULT_QUESTIONS[category] || DEFAULT_QUESTIONS.general;
+        const rawQuestion = (question || '').trim();
+        const usedDefault = !rawQuestion;
+        const displayQuestion = rawQuestion || DEFAULT_QUESTIONS[category] || DEFAULT_QUESTIONS.general;
         const intent = detectIntent(displayQuestion);
         const topic = intent ? intent.topic : detectTopic(displayQuestion, category);
         const qType = detectQuestionType(displayQuestion);
         const seed = hashString(seedText + displayQuestion + topic + (intent ? intent.id : ''));
 
         let prob = adjustProbability(getScoreForTopic(topic, scores), signals);
-        // 具体意图题用对应维度分，并稍微拉开，避免永远同质
         if (intent) {
             const base = getScoreForTopic(intent.topic, scores);
             prob = adjustProbability(base, signals);
-            // 「我是不是xxx」类：用分数映射是否像，而不是运势吉凶套话
-            if (/是不是|算不算|我是|我算/.test(displayQuestion)) {
+            // 「是不是/算不算」类：映射像不像，而不是运势吉凶套话
+            if (/是不是|算不算|我是|我算|到底是|究竟是/.test(displayQuestion)) {
                 prob = roundProb(Math.max(30, Math.min(90, base + ((seed % 21) - 10))));
             }
         }
@@ -1051,36 +1139,44 @@
             label = verdictLabel(prob, seed + 11);
         }
 
-        const opener = pickVariant(OPENERS, seed + 1);
+        const direct = buildDirectHit(displayQuestion, intent, label, prob, qType);
         const main = buildAnswer(topic, qType, prob, seed, intent);
-        const tip = pickVariant(TIPS[topic] || TIPS.general, seed + 7);
 
-        let parts = [opener, main];
-        // 只有真正在问时间/今年运势时才加时间段，避免答舔狗却扯九十月
+        const parts = [direct, main];
+
+        if (usedDefault) {
+            parts.unshift('你没写具体问题，我只能按「' + displayQuestion + '」这种泛问来答。想听准的，下次把原话写上，比如「我是不是舔狗」「要不要表白」。');
+        } else if (!intent) {
+            const keys = echoKeywords(displayQuestion);
+            if (keys.length) {
+                parts.splice(1, 0, '我抓到的关键词是：' + keys.join('、') + '。下面就围着这些说，不给你换成别的题目。');
+            }
+        }
+
+        // 只有真正在问时间才加时间段，避免答舔狗却扯九十月
         if (!intent && (qType === 'when' || /什么时候|何时|几月|哪天/.test(displayQuestion))) {
             parts.push(buildWhenHint(topic, prob, seed + 3));
-        } else if (!intent && /今年|明年|下半年|上半年/.test(displayQuestion) && qType !== 'open') {
+        } else if (!intent && /今年|明年|下半年|上半年/.test(displayQuestion) && (qType === 'yesno' || qType === 'when')) {
             parts.push(buildWhenHint(topic, prob, seed + 3));
         }
-        // 意图题用更贴题的收尾，不硬塞通用运势tips
+
         if (intent && INTENT_TIPS[intent.id]) {
             parts.push(pickVariant(INTENT_TIPS[intent.id], seed + 9));
         } else if (intent) {
-            parts.push('记住：你问的是「' + displayQuestion + '」，我就按这个答。别听完又自己翻译成别的意思。');
+            parts.push('记住：你问的是' + '「' + displayQuestion + '」' + '，我就按这个答。别听完又自己翻译成别的意思。');
         } else {
-            parts.push(tip);
+            parts.push(pickVariant(TIPS[topic] || TIPS.general, seed + 7));
         }
-
-        const body = parts.join('\n\n');
 
         return {
             question: displayQuestion,
             topic,
             probability: prob,
             label,
-            body,
+            body: parts.join('\n\n'),
             tip: '',
-            qType
+            qType,
+            intentId: intent ? intent.id : ''
         };
     }
 

@@ -1056,16 +1056,21 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         const relationTemplates = {
-            general: `你问的是【综合运势】。今日星盘指数 ${report.starIndex}%——数字好看不代表你躺着就能赢，齿轮咬合得再顺，你不踩油门也白搭。`,
-            love: `你问的是【恋爱情感】。共鸣指数 ${report.scores.love}%。守护星【${zodiac.ruler}】往情感宫砸了一脚——机会有没有另说，你敢不敢接才是重点。`,
-            career: `你问的是【事业学业】。同频度 ${report.scores.career}%。土星不吃「我努力了」这种空话，吃结果。该冲就冲，别光自我感动。`,
-            wealth: `你问的是【财富走势】。物质频段 ${report.scores.wealth}%。金色三角听着漂亮，手还是别往高风险里乱伸——财运帮懒人，不帮赌徒。`,
-            health: `你问的是【健康指引】。共鸣度 ${report.scores.health}%。平稳不等于你可以继续作。身体记账很准，熬夜、内耗它都会算利息。`
+            general: `领域是【综合运势】。今日星盘指数 ${report.starIndex}%——数字好看不代表你躺着就能赢，齿轮咬合得再顺，你不踩油门也白搭。`,
+            love: `领域是【恋爱情感】。共鸣指数 ${report.scores.love}%。守护星【${zodiac.ruler}】往情感宫砸了一脚——机会有没有另说，你敢不敢接才是重点。`,
+            career: `领域是【事业学业】。同频度 ${report.scores.career}%。土星不吃「我努力了」这种空话，吃结果。该冲就冲，别光自我感动。`,
+            wealth: `领域是【财富走势】。物质频段 ${report.scores.wealth}%。金色三角听着漂亮，手还是别往高风险里乱伸——财运帮懒人，不帮赌徒。`,
+            health: `领域是【健康指引】。共鸣度 ${report.scores.health}%。平稳不等于你可以继续作。身体记账很准，熬夜、内耗它都会算利息。`
         };
 
         const outText = relationTemplates[report.category] || relationTemplates['general'];
+        const askLine = savedUserQuestion
+            ? `你刚才问的是「${savedUserQuestion}」。牌意和上面的直答都围绕这句，别听成别的题。`
+            : `你没写具体问题，所以只能按【${report.category === 'love' ? '感情' : report.category === 'career' ? '事业' : report.category === 'wealth' ? '财运' : report.category === 'health' ? '健康' : '综合'}】泛答。下次把原话写上会准很多。`;
 
         compiledOracleText = `${introTemplates[Math.floor(Math.random() * introTemplates.length)]}
+
+${askLine}
 
 ${outText}
 
