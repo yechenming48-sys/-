@@ -646,29 +646,37 @@ document.addEventListener('DOMContentLoaded', () => {
         drawingCanvas.classList.remove('charged');
     });
 
-    // Confirm canvas: Glow and transition
+    // Confirm canvas: Glow and transition（每次召唤消耗 1 积分）
     btnConfirmCanvas.addEventListener('click', () => {
-        // 1. Talisman starts glowing only after drawing is finished and confirmed
-        drawingCanvas.classList.add('charged');
+        const run = () => {
+            // 1. Talisman starts glowing only after drawing is finished and confirmed
+            drawingCanvas.classList.add('charged');
 
-        // 2. Play particle burst at the center of the canvas
-        const rect = drawingCanvas.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        if (window.particleSystem) {
-            window.particleSystem.createBurst(centerX, centerY, 40, 'gold');
-        }
-
-        // 3. Switch screen after glow payoff
-        setTimeout(() => {
-            switchScreen(screenDraw, screenLoading);
+            // 2. Play particle burst at the center of the canvas
+            const rect = drawingCanvas.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
             if (window.particleSystem) {
-                window.particleSystem.setMode('ritual');
+                window.particleSystem.createBurst(centerX, centerY, 40, 'gold');
             }
-            
-            // Run animation divination
-            runRitualAnimation(savedUserName, savedBirthDate, selectedCategory);
-        }, 900);
+
+            // 3. Switch screen after glow payoff
+            setTimeout(() => {
+                switchScreen(screenDraw, screenLoading);
+                if (window.particleSystem) {
+                    window.particleSystem.setMode('ritual');
+                }
+                
+                // Run animation divination
+                runRitualAnimation(savedUserName, savedBirthDate, selectedCategory);
+            }, 900);
+        };
+
+        if (window.XJGAuth && typeof window.XJGAuth.spendPoints === 'function') {
+            window.XJGAuth.spendPoints(1, run);
+        } else {
+            run();
+        }
     });
 
     // Form Submission: Proceed to Talisman Drawing Screen
@@ -1033,14 +1041,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let compiledOracleText = '';
 
     function renderPlainSpeak(signals = {}) {
-        if (!window.PlainSpeak || !userReport) return;
-        window.PlainSpeak.render(document.getElementById('plain-speak-output'), {
+        const plainSpeakEl = document.getElementById('plain-speak-output');
+        if (!plainSpeakEl || !userReport) return;
+        const ctx = {
             question: savedUserQuestion,
             category: userReport.category,
             scores: userReport.scores,
             signals,
             seedText: userNameInput + savedBirthDate
-        });
+        };
+        if (window.AIReader) {
+            window.AIReader.render(plainSpeakEl, ctx);
+        } else if (window.PlainSpeak) {
+            window.PlainSpeak.render(plainSpeakEl, ctx);
+        }
     }
 
     // Create custom mystical text

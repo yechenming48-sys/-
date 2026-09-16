@@ -1,0 +1,313 @@
+/* ============================================================
+   玄机阁 · 多 AI 解读师 / 外接 AI 设置 UI
+   ============================================================ */
+
+.ai-reader-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.ai-reader-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.ai-reader-personas {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.ai-reader-chip {
+    padding: 0.38rem 0.72rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(247, 243, 255, 0.68);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    white-space: nowrap;
+}
+
+.ai-reader-chip:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #fff;
+}
+
+.ai-reader-chip.active {
+    color: #1a1028;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffe7a8, #e8c872);
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(232, 200, 114, 0.28);
+}
+
+.ai-reader-settings {
+    padding: 0.38rem 0.78rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(247, 243, 255, 0.62);
+    font-size: 0.74rem;
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.ai-reader-settings:hover {
+    color: var(--xjg-cyan, #4de8ff);
+    border-color: rgba(77, 232, 255, 0.4);
+    background: rgba(77, 232, 255, 0.08);
+}
+
+.ai-reader-status.is-offline {
+    color: rgba(255, 160, 160, 0.75);
+}
+
+/* AI 深度解读卡片 */
+.ai-reader-card-ai {
+    border-color: rgba(77, 232, 255, 0.24);
+}
+
+.ai-badge {
+    background: linear-gradient(90deg, #a8fff5, #4de8ff);
+    color: #031418;
+    box-shadow: 0 0 16px rgba(77, 232, 255, 0.3);
+}
+
+/* 主题微调 */
+body.theme-oracle .ai-reader-chip.active {
+    background: linear-gradient(135deg, #ffb6ec, #ff5ec8);
+    color: #1a0a18;
+    box-shadow: 0 6px 18px rgba(255, 94, 200, 0.3);
+}
+
+body.theme-iching .ai-reader-chip.active {
+    background: linear-gradient(135deg, #a8fff5, #00f0ff);
+    color: #031418;
+    box-shadow: 0 6px 18px rgba(0, 240, 255, 0.3);
+}
+
+body.theme-ziwei .ai-reader-chip.active {
+    background: linear-gradient(135deg, #fff0c4, #e8c872);
+    color: #1a1028;
+}
+
+/* ---------- 设置弹窗 ---------- */
+.ai-reader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10002;
+    display: grid;
+    place-items: center;
+    padding: 1.2rem;
+    background: rgba(2, 0, 10, 0.74);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.26s ease, visibility 0.26s ease;
+}
+
+.ai-reader-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ai-reader-modal {
+    position: relative;
+    width: min(420px, 100%);
+    padding: 22px 22px 18px;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: linear-gradient(180deg, rgba(18, 11, 44, 0.97), rgba(8, 5, 22, 0.98));
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transform: translateY(14px) scale(0.98);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ai-reader-overlay.open .ai-reader-modal {
+    transform: translateY(0) scale(1);
+}
+
+.ai-reader-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(247, 243, 255, 0.6);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.ai-reader-close:hover {
+    color: #fff;
+    border-color: rgba(77, 232, 255, 0.4);
+    background: rgba(77, 232, 255, 0.08);
+}
+
+.ai-reader-modal-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.ai-reader-modal-sigil {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 1.3rem;
+    background: radial-gradient(circle, rgba(77, 232, 255, 0.18), rgba(77, 232, 255, 0.04));
+    border: 1px solid rgba(77, 232, 255, 0.28);
+}
+
+.ai-reader-modal-head h3 {
+    margin: 0;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.12rem;
+    letter-spacing: 0.04em;
+    color: #f7f3ff;
+}
+
+.ai-reader-modal-head p {
+    margin: 3px 0 0;
+    font-size: 0.68rem;
+    color: rgba(247, 243, 255, 0.45);
+}
+
+.ai-reader-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 11px;
+    font-size: 0.78rem;
+    color: rgba(247, 243, 255, 0.66);
+}
+
+.ai-reader-field > span {
+    flex: 0 0 auto;
+}
+
+.ai-reader-field input[type='text'],
+.ai-reader-field input[type='password'] {
+    flex: 1;
+    padding: 9px 11px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f7f3ff;
+    font-size: 0.82rem;
+    outline: none;
+    transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.ai-reader-field input:focus {
+    border-color: rgba(77, 232, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(77, 232, 255, 0.12);
+}
+
+.ai-reader-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex: 0 0 auto;
+}
+
+.ai-reader-switch input {
+    display: none;
+}
+
+.ai-reader-switch i {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    transition: all 0.22s ease;
+    cursor: pointer;
+}
+
+.ai-reader-switch i::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.22s ease;
+}
+
+.ai-reader-switch input:checked + i {
+    background: linear-gradient(135deg, #4de8ff, #2bb6d8);
+    border-color: transparent;
+}
+
+.ai-reader-switch input:checked + i::after {
+    transform: translateX(20px);
+}
+
+.ai-reader-save {
+    width: 100%;
+    margin-top: 4px;
+    padding: 11px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4de8ff, #2bb6d8);
+    color: #031418;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-reader-save:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(77, 232, 255, 0.28);
+}
+
+.ai-reader-warn {
+    margin-top: 12px;
+    font-size: 0.64rem;
+    line-height: 1.7;
+    color: rgba(247, 243, 255, 0.4);
+}
+
+@media (max-width: 640px) {
+    .ai-reader-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ai-reader-personas {
+        gap: 0.35rem;
+    }
+
+    .ai-reader-chip {
+        padding: 0.34rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    .ai-reader-settings {
+        align-self: flex-start;
+    }
+}

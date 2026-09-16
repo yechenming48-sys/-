@@ -10,8 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/portal.css">
+    <link rel="stylesheet" href="./assets/auth.css">
+    <script src="./assets/i18n.js"></script>
 </head>
-<body>
+<body class="xjg-portal">
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
     <div id="spotlight" aria-hidden="true"></div>
     <div class="bg-runes" id="rune-layer" aria-hidden="true"></div>
@@ -22,13 +24,13 @@
                 <div class="brand-sigil">✦</div>
                 <div>
                     <span class="brand-title">XUAN JI GE</span>
-                    <span class="brand-subtitle">东方命理门户</span>
+                    <span class="brand-subtitle" data-i18n="common.brandSubtitle">东方命理门户</span>
                 </div>
             </a>
             <div class="top-links">
-                <a class="top-link" href="./ai-fortune-teller/index.html">星轨神谕</a>
-                <a class="top-link" href="./求签/index.html">紫微天枢</a>
-                <a class="top-link" href="./算挂/index.html">赛博周易</a>
+                <a class="top-link" href="./ai-fortune-teller/index.html" data-i18n="common.navOracle">星轨神谕</a>
+                <a class="top-link" href="./求签/index.html" data-i18n="common.navZiwei">紫微天枢</a>
+                <a class="top-link" href="./算挂/index.html" data-i18n="common.navIching">赛博周易</a>
             </div>
         </nav>
 
@@ -38,28 +40,28 @@
                 <h1 class="hero-title-en">XUAN JI GE</h1>
                 <div class="hero-title-cn">玄 机 阁</div>
                 <p class="hero-subtitle">ORACLE · DIVINATION · DESTINY</p>
-                <p class="hero-desc">
+                <p class="hero-desc" data-i18n="portal.heroDesc">
                     一座为东方玄学与现代交互而生的高颜值命理门户。星轨、斗数、周易三条命运路径在此交汇，以光影、符印与 AI 神谕，为你呈现更具仪式感的探索体验。
                 </p>
 
                 <div class="hero-metrics" aria-label="平台能力概览">
                     <div class="metric-pill">
                         <span class="metric-value">03</span>
-                        <span class="metric-label">命理系统</span>
+                        <span class="metric-label" data-i18n="portal.metricCount">命理系统</span>
                     </div>
                     <div class="metric-pill">
                         <span class="metric-value">AI</span>
-                        <span class="metric-label">智能解读</span>
+                        <span class="metric-label" data-i18n="portal.metricAI">智能解读</span>
                     </div>
                     <div class="metric-pill">
                         <span class="metric-value">LIVE</span>
-                        <span class="metric-label">沉浸交互</span>
+                        <span class="metric-label" data-i18n="portal.metricLive">沉浸交互</span>
                     </div>
                 </div>
 
                 <div class="hero-actions">
-                    <a class="hero-btn primary" href="#portals">进入命理之门</a>
-                    <a class="hero-btn ghost" href="./ai-fortune-teller/index.html">立即体验星轨神谕</a>
+                    <a class="hero-btn primary" href="#portals" data-i18n="portal.ctaEnter">进入命理之门</a>
+                    <a class="hero-btn ghost" href="./ai-fortune-teller/index.html" data-i18n="portal.ctaTry">立即体验星轨神谕</a>
                 </div>
             </div>
 
@@ -77,10 +79,10 @@
         <section id="portals">
             <div class="section-head">
                 <div>
-                    <div class="section-kicker">Choose Your Portal</div>
-                    <h2 class="section-title">选择命理之门</h2>
+                    <div class="section-kicker" data-i18n="portal.sectionKicker">Choose Your Portal</div>
+                    <h2 class="section-title" data-i18n="portal.sectionTitle">选择命理之门</h2>
                 </div>
-                <p class="section-note">三条不同气质的命运路径，从星盘契约到六爻起卦，为你提供高颜值、强沉浸的玄学体验。</p>
+                <p class="section-note" data-i18n="portal.sectionNote">三条不同气质的命运路径，从星盘契约到六爻起卦，为你提供高颜值、强沉浸的玄学体验。</p>
             </div>
 
             <div class="cards-grid">
@@ -108,18 +110,18 @@
                             <span class="card-badge">AI ORACLE</span>
                         </div>
                         <div class="card-name-en">Star Orbit Oracle</div>
-                        <div class="card-name-cn">星轨神谕</div>
-                        <p class="card-desc">AI 融合西方星盘玄术，以星粒流光、塔罗镜像与契约仪式，解读你的宇宙运势与命运轨迹。</p>
+                        <div class="card-name-cn" data-i18n="portal.card1Name">星轨神谕</div>
+                        <p class="card-desc" data-i18n="portal.card1Desc">AI 融合西方星盘玄术，以星粒流光、塔罗镜像与契约仪式，解读你的宇宙运势与命运轨迹。</p>
                         <div class="card-meta">
-                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value">星盘契约</span></div>
-                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value">塔罗指引</span></div>
+                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value" data-i18n="portal.card1Meta1">星盘契约</span></div>
+                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value" data-i18n="portal.card1Meta2">塔罗指引</span></div>
                         </div>
                         <div class="card-tags">
-                            <span class="tag">星座占星</span>
-                            <span class="tag">AI神谕</span>
-                            <span class="tag">宇宙运势</span>
+                            <span class="tag" data-i18n="portal.card1Tag1">星座占星</span>
+                            <span class="tag" data-i18n="portal.card1Tag2">AI神谕</span>
+                            <span class="tag" data-i18n="portal.card1Tag3">宇宙运势</span>
                         </div>
-                        <div class="card-cta"><span>进入神谕殿堂</span><span class="arrow">→</span></div>
+                        <div class="card-cta"><span data-i18n="portal.card1Cta">进入神谕殿堂</span><span class="arrow">→</span></div>
                     </div>
                 </a>
 
@@ -145,18 +147,18 @@
                             <span class="card-badge">ZIWEI DOUSHU</span>
                         </div>
                         <div class="card-name-en">Purple Star Astrology</div>
-                        <div class="card-name-cn">紫微天枢</div>
-                        <p class="card-desc">皇家紫金美学下的紫微斗数排盘系统，以十二宫位与星曜流转，推演人生格局与运势脉络。</p>
+                        <div class="card-name-cn" data-i18n="portal.card2Name">紫微天枢</div>
+                        <p class="card-desc" data-i18n="portal.card2Desc">皇家紫金美学下的紫微斗数排盘系统，以十二宫位与星曜流转，推演人生格局与运势脉络。</p>
                         <div class="card-meta">
-                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value">在线排盘</span></div>
-                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value">斗数课堂</span></div>
+                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value" data-i18n="portal.card2Meta1">在线排盘</span></div>
+                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value" data-i18n="portal.card2Meta2">斗数课堂</span></div>
                         </div>
                         <div class="card-tags">
-                            <span class="tag">紫微斗数</span>
-                            <span class="tag">十二宫位</span>
-                            <span class="tag">八字排盘</span>
+                            <span class="tag" data-i18n="portal.card2Tag1">紫微斗数</span>
+                            <span class="tag" data-i18n="portal.card2Tag2">十二宫位</span>
+                            <span class="tag" data-i18n="portal.card2Tag3">八字排盘</span>
                         </div>
-                        <div class="card-cta"><span>进入天枢殿堂</span><span class="arrow">→</span></div>
+                        <div class="card-cta"><span data-i18n="portal.card2Cta">进入天枢殿堂</span><span class="arrow">→</span></div>
                     </div>
                 </a>
 
@@ -185,18 +187,18 @@
                             <span class="card-badge">I CHING</span>
                         </div>
                         <div class="card-name-en">Cyber Zhou Yi</div>
-                        <div class="card-name-cn">赛博周易</div>
-                        <p class="card-desc">水墨玄学与赛博霓虹的终极融合。六十四卦演算、爻线推演与画符仪式，开启全息天机占卜之旅。</p>
+                        <div class="card-name-cn" data-i18n="portal.card3Name">赛博周易</div>
+                        <p class="card-desc" data-i18n="portal.card3Desc">水墨玄学与赛博霓虹的终极融合。六十四卦演算、爻线推演与画符仪式，开启全息天机占卜之旅。</p>
                         <div class="card-meta">
-                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value">六爻起卦</span></div>
-                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value">画符仪式</span></div>
+                            <div class="meta-item"><span class="meta-label">流程</span><span class="meta-value" data-i18n="portal.card3Meta1">六爻起卦</span></div>
+                            <div class="meta-item"><span class="meta-label">体验</span><span class="meta-value" data-i18n="portal.card3Meta2">画符仪式</span></div>
                         </div>
                         <div class="card-tags">
-                            <span class="tag">六十四卦</span>
-                            <span class="tag">爻线推演</span>
-                            <span class="tag">AI解卦</span>
+                            <span class="tag" data-i18n="portal.card3Tag1">六十四卦</span>
+                            <span class="tag" data-i18n="portal.card3Tag2">爻线推演</span>
+                            <span class="tag" data-i18n="portal.card3Tag3">AI解卦</span>
                         </div>
-                        <div class="card-cta"><span>进入易经殿堂</span><span class="arrow">→</span></div>
+                        <div class="card-cta"><span data-i18n="portal.card3Cta">进入易经殿堂</span><span class="arrow">→</span></div>
                     </div>
                 </a>
             </div>
@@ -204,10 +206,11 @@
 
         <footer class="site-footer">
             <span class="line"></span>
-            玄机阁 · XUAN JI GE · 东方命理门户 · 2026
+            <span data-i18n="portal.footer">玄机阁 · XUAN JI GE · 东方命理门户 · 2026</span>
         </footer>
     </div>
 
+    <script src="./assets/auth.js"></script>
     <script src="./assets/portal.js"></script>
 </body>
 </html>

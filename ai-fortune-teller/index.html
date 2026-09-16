@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/assets/themes.css">
     <link rel="stylesheet" href="/assets/plain-speak.css">
     <link rel="stylesheet" href="/assets/premium-subpages.css">
+    <link rel="stylesheet" href="../assets/auth.css">
+    <link rel="stylesheet" href="../assets/ai-reader.css">
+    <script src="../assets/i18n.js"></script>
 </head>
 <body class="theme-oracle">
     <!-- Background Canvas for Particles -->
@@ -113,18 +116,18 @@
                         <span class="sep-line"></span>
                     </div>
 
-                    <p class="mystic-subtitle">AI 智能星盘与命运塔罗占卜</p>
-                    <div class="mystic-desc">
+                    <p class="mystic-subtitle" data-i18n="oracle.subtitle">AI 智能星盘与命运塔罗占卜</p>
+                    <div class="mystic-desc" data-i18n="oracle.desc">
                         基于星相物理量子偏振模拟，解译您此生与群星交汇的引力波。<br>
                         让古老占星密钥与 AI 智慧为您拨开命运的重重迷雾。
                     </div>
                     <div class="feature-chips">
-                        <span class="feature-chip">星盘契约</span>
-                        <span class="feature-chip">塔罗镜像</span>
-                        <span class="feature-chip">AI 神谕</span>
+                        <span class="feature-chip" data-i18n="oracle.tag1">星盘契约</span>
+                        <span class="feature-chip" data-i18n="oracle.tag2">塔罗镜像</span>
+                        <span class="feature-chip" data-i18n="oracle.tag3">AI 神谕</span>
                     </div>
                     <button class="btn btn-mystic animate-pulse" id="btn-enter">
-                        <span>开启命运之门</span>
+                        <span data-i18n="oracle.enter">开启命运之门</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
@@ -136,65 +139,65 @@
             <div class="content-wrapper">
                 <div class="glass-card premium-frame fade-in-up">
                     <div class="card-header">
-                        <h2>星盘契约</h2>
-                        <p class="card-subtitle">请留下您的印记，以便AI读取对应的宇宙频率</p>
+                        <h2 data-i18n="oracle.contractTitle">星盘契约</h2>
+                        <p class="card-subtitle" data-i18n="oracle.contractSub">请留下您的印记，以便AI读取对应的宇宙频率</p>
                     </div>
                     <form id="fortune-form" autocomplete="off">
                         <div class="form-grid">
                             <!-- Name Input -->
                             <div class="input-group">
-                                <label for="user-name">您的称呼</label>
+                                <label for="user-name" data-i18n="oracle.name">您的称呼</label>
                                 <div class="input-wrapper">
                                     <i class="fa-regular fa-user input-icon"></i>
-                                    <input type="text" id="user-name" placeholder="输入名字或代号" required>
+                                    <input type="text" id="user-name" placeholder="输入名字或代号" data-i18n-placeholder="oracle.namePh" required>
                                 </div>
                             </div>
                             
                             <!-- Birthdate Input -->
                             <div class="input-group">
-                                <label for="birth-date">诞生之日</label>
+                                <label for="birth-date" data-i18n="oracle.birth">诞生之日</label>
                                 <div class="input-wrapper">
                                     <i class="fa-regular fa-calendar-days input-icon"></i>
                                     <input type="date" id="birth-date" required>
                                 </div>
                                 <div class="zodiac-badge" id="zodiac-badge">
-                                    <span id="zodiac-text">自动测算星轨...</span>
+                                    <span id="zodiac-text" data-i18n="oracle.autoZodiac">自动测算星轨...</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Specific question — drives plain-speak answer -->
                         <div class="input-group">
-                            <label for="user-question">具体想问的事（写原话，回答才对题）</label>
+                            <label for="user-question" data-i18n="oracle.question">具体想问的事（写原话，回答才对题）</label>
                             <div class="input-wrapper">
                                 <i class="fa-regular fa-comment-dots input-icon"></i>
-                                <input type="text" id="user-question" placeholder="例如：我是不是舔狗？要不要表白？他是不是渣？">
+                                <input type="text" id="user-question" placeholder="例如：我是不是舔狗？要不要表白？他是不是渣？" data-i18n-placeholder="oracle.questionPh">
                             </div>
                         </div>
 
                         <!-- Focus Area Selection -->
                         <div class="input-group focus-group">
-                            <label>追寻之问（选择您最想探寻的运势领域）</label>
+                            <label data-i18n="oracle.focus">追寻之问（选择您最想探寻的运势领域）</label>
                             <div class="focus-selector">
                                 <div class="focus-option active" data-category="general">
                                     <i class="fa-solid fa-yin-yang"></i>
-                                    <span>综合运势</span>
+                                    <span data-i18n="oracle.focusGeneral">综合运势</span>
                                 </div>
                                 <div class="focus-option" data-category="love">
                                     <i class="fa-solid fa-heart"></i>
-                                    <span>恋爱情感</span>
+                                    <span data-i18n="oracle.focusLove">恋爱情感</span>
                                 </div>
                                 <div class="focus-option" data-category="career">
                                     <i class="fa-solid fa-briefcase"></i>
-                                    <span>事业学业</span>
+                                    <span data-i18n="oracle.focusCareer">事业学业</span>
                                 </div>
                                 <div class="focus-option" data-category="wealth">
                                     <i class="fa-solid fa-coins"></i>
-                                    <span>财富走势</span>
+                                    <span data-i18n="oracle.focusWealth">财富走势</span>
                                 </div>
                                 <div class="focus-option" data-category="health">
                                     <i class="fa-solid fa-heart-pulse"></i>
-                                    <span>健康指引</span>
+                                    <span data-i18n="oracle.focusHealth">健康指引</span>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +205,7 @@
                         <!-- Submit Button -->
                         <div class="form-actions text-center">
                             <button type="submit" class="btn btn-primary btn-glow" id="btn-submit">
-                                <span>召唤星轨神谕</span>
+                                <span data-i18n="oracle.submit">召唤星轨神谕</span>
                                 <i class="fa-solid fa-infinity"></i>
                             </button>
                         </div>
@@ -216,8 +219,8 @@
             <div class="content-wrapper">
                 <div class="glass-card drawing-card premium-frame fade-in-up text-center">
                     <div class="card-header">
-                        <h2>手书契印</h2>
-                        <p class="card-subtitle">请凭直觉在圆盘中画出您的命运符号（画完才会激发光芒）</p>
+                        <h2 data-i18n="oracle.drawTitle">手书契印</h2>
+                        <p class="card-subtitle" data-i18n="oracle.drawSub">请凭直觉在圆盘中画出您的命运符号（画完才会激发光芒）</p>
                     </div>
                     
                     <!-- Large Canvas Drawing Area -->
@@ -231,11 +234,12 @@
                     <div class="drawing-actions">
                         <button class="btn btn-secondary" id="btn-clear-canvas">
                             <i class="fa-solid fa-eraser"></i>
-                            <span>重置符印</span>
+                            <span data-i18n="oracle.drawReset">重置符印</span>
                         </button>
                         <button class="btn btn-primary btn-glow" id="btn-confirm-canvas">
-                            <span>灌注星能并召唤</span>
+                            <span data-i18n="oracle.drawConfirm">灌注星能并召唤</span>
                             <i class="fa-solid fa-bolt"></i>
+                            <span class="xjg-cost" data-i18n="common.cost">1 积分/次</span>
                         </button>
                     </div>
                 </div>
@@ -262,7 +266,7 @@
                     </div>
                 </div>
                 
-                <h3 class="loading-title">正在呼唤星辰...</h3>
+                <h3 class="loading-title" data-i18n="oracle.loading">正在呼唤星辰...</h3>
                 
                 <div class="loading-console">
                     <div class="console-line">Ready to trace astronomical strings...</div>
@@ -476,6 +480,8 @@
 
     <script src="/assets/atmosphere.js"></script>
     <script src="/assets/plain-speak.js"></script>
+    <script src="../assets/auth.js"></script>
+    <script src="../assets/ai-reader.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>
 </body>

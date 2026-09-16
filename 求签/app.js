@@ -320,27 +320,36 @@ function initCalcForm() {
 
     const [year, month, day] = birthDateVal.split("-").map(Number);
 
-    try {
-      const chartData = ziwei.calculateChart({
-        name,
-        gender,
-        birthYear: year,
-        birthMonth: month,
-        birthDay: day,
-        birthHourIndex: birthHourVal,
-        calendarType,
-        isLeapMonth
-      });
+    const runDivination = () => {
+      try {
+        const chartData = ziwei.calculateChart({
+          name,
+          gender,
+          birthYear: year,
+          birthMonth: month,
+          birthDay: day,
+          birthHourIndex: birthHourVal,
+          calendarType,
+          isLeapMonth
+        });
 
-      // 渲染数据
-      renderChart(chartData);
+        // 渲染数据
+        renderChart(chartData);
 
-      // 进入激活召唤动效
-      summonChartSequence(chartData);
+        // 进入激活召唤动效
+        summonChartSequence(chartData);
 
-    } catch (err) {
-      alert("排盘出错: " + err.message);
-      console.error(err);
+      } catch (err) {
+        alert("排盘出错: " + err.message);
+        console.error(err);
+      }
+    };
+
+    // 每次排盘消耗 1 积分（未登录会先弹出登录）
+    if (window.XJGAuth && typeof window.XJGAuth.spendPoints === "function") {
+      window.XJGAuth.spendPoints(1, runDivination);
+    } else {
+      runDivination();
     }
   });
 }
@@ -360,20 +369,28 @@ window.resetForm = resetForm;
 
 function renderZiweiPlainSpeak() {
   const el = document.getElementById("plain-speak-output");
-  if (!el || !window.PlainSpeak) return;
+  if (!el || (!window.AIReader && !window.PlainSpeak)) return;
 
   const question = (document.getElementById("pactQuestion")?.value || "").trim();
   const category = document.getElementById("pactQuest")?.value || "general";
   const name = (document.getElementById("username")?.value || "").trim();
   const birthDate = document.getElementById("birthDate")?.value || "";
-  const scores = window.PlainSpeak.scoresFromSeed(name + birthDate + category);
+  const scores = (window.PlainSpeak && window.PlainSpeak.scoresFromSeed)
+    ? window.PlainSpeak.scoresFromSeed(name + birthDate + category)
+    : { general: 65 };
 
-  window.PlainSpeak.render(el, {
+  const ctx = {
     question,
     category,
     scores,
     seedText: name + birthDate + category
-  });
+  };
+
+  if (window.AIReader) {
+    window.AIReader.render(el, ctx);
+  } else if (window.PlainSpeak) {
+    window.PlainSpeak.render(el, ctx);
+  }
 }
 
 // 星盘仪式召唤动画（星盘觉醒）

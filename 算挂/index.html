@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/assets/themes.css">
     <link rel="stylesheet" href="/assets/plain-speak.css">
     <link rel="stylesheet" href="/assets/premium-subpages.css">
+    <link rel="stylesheet" href="../assets/auth.css">
+    <link rel="stylesheet" href="../assets/ai-reader.css">
+    <script src="../assets/i18n.js"></script>
 </head>
 <body class="theme-iching">
 
@@ -103,13 +106,13 @@
                 
                 <div class="page-kicker"><span class="dot"></span> CYBER DIVINATION CORE</div>
                 <h1 class="system-title">CYBER <span class="title-separator">☯</span> 周易</h1>
-                <div class="system-tag">六十四卦 · 全息占卜</div>
-                <p class="system-subtitle">赛博纪元 · 古老智慧的数字回响。在0与1之间，寻找天地的启示。</p>
+                <div class="system-tag" data-i18n="iching.systemTag">六十四卦 · 全息占卜</div>
+                <p class="system-subtitle" data-i18n="iching.systemSub">赛博纪元 · 古老智慧的数字回响。在0与1之间，寻找天地的启示。</p>
 
                 <div class="feature-chips">
-                    <span class="feature-chip">画符仪式</span>
-                    <span class="feature-chip">六爻起卦</span>
-                    <span class="feature-chip">AI 解卦</span>
+                    <span class="feature-chip" data-i18n="iching.tag1">画符仪式</span>
+                    <span class="feature-chip" data-i18n="iching.tag2">六爻起卦</span>
+                    <span class="feature-chip" data-i18n="iching.tag3">AI 解卦</span>
                 </div>
                 
                 <div class="intro-buttons">
@@ -122,7 +125,7 @@
                         <span class="oracle-btn-scan"></span>
                         <span class="oracle-btn-inner">
                             <span class="oracle-btn-icon">⚡</span>
-                            <span class="oracle-btn-text">启动占卜</span>
+                            <span class="oracle-btn-text" data-i18n="sub.startDivination">启动占卜</span>
                         </span>
                     </button>
                 </div>
@@ -134,41 +137,41 @@
         <section id="screen-drawing" class="screen">
             <div class="form-container">
                 <div class="page-kicker"><span class="dot"></span> RITUAL INPUT</div>
-                <h2 class="form-main-title">起 卦</h2>
-                <p class="form-main-subtitle">心诚则灵，静心默念你的问题，点击起卦</p>
+                <h2 class="form-main-title" data-i18n="iching.formTitle">起 卦</h2>
+                <p class="form-main-subtitle" data-i18n="iching.formSub">心诚则灵，静心默念你的问题，点击起卦</p>
 
                 <!-- 问事信息卡片 -->
                 <div class="form-card premium-frame">
                     
                     <!-- 1. 问事类别 -->
                     <div class="form-group">
-                        <label class="form-label">问事类别</label>
+                        <label class="form-label" data-i18n="iching.category">问事类别</label>
                         <select id="select-category" class="form-select">
-                            <option value="">-- 请选择 --</option>
-                            <option value="career">事业前途</option>
-                            <option value="love">情缘人际</option>
-                            <option value="wealth">财运亨通</option>
-                            <option value="health">身心行止</option>
-                            <option value="general">终生大局</option>
+                            <option value="" data-i18n="iching.categoryPh">-- 请选择 --</option>
+                            <option value="career" data-i18n="iching.catCareer">事业前途</option>
+                            <option value="love" data-i18n="iching.catLove">情缘人际</option>
+                            <option value="wealth" data-i18n="iching.catWealth">财运亨通</option>
+                            <option value="health" data-i18n="iching.catHealth">身心行止</option>
+                            <option value="general" data-i18n="iching.catGeneral">终生大局</option>
                         </select>
                     </div>
 
                     <!-- 2. 问题输入 -->
                     <div class="form-group">
-                        <label class="form-label">你的问题或想说的话（可选）</label>
-                        <textarea id="input-question" class="form-textarea" placeholder="写下原话，例如：我是不是舔狗？要不要跳槽？该不该分手？"></textarea>
+                        <label class="form-label" data-i18n="iching.question">你的问题或想说的话（可选）</label>
+                        <textarea id="input-question" class="form-textarea" placeholder="写下原话，例如：我是不是舔狗？要不要跳槽？该不该分手？" data-i18n-placeholder="iching.questionPh"></textarea>
                     </div>
 
                     <!-- 3. 画符板 -->
                     <div class="talisman-section">
                         <div class="talisman-header">
-                            <span class="talisman-title">✦ 画符请愿</span>
+                            <span class="talisman-title" data-i18n="iching.talismanTitle">✦ 画符请愿</span>
                             <div class="brush-options">
                                 <div class="brush-color-btn" data-color="cyan" style="background: #00f0ff;"></div>
                                 <div class="brush-color-btn active" data-color="pink" style="background: #ff3c00;"></div>
                                 <div class="brush-color-btn" data-color="gold" style="background: #ffd700;"></div>
                             </div>
-                            <span class="talisman-subtitle">摹画符咒 · 以诚感天</span>
+                            <span class="talisman-subtitle" data-i18n="iching.talismanSub">摹画符咒 · 以诚感天</span>
                         </div>
                         
                         <div class="talisman-board">
@@ -176,7 +179,7 @@
                             <div class="canvas-wrapper">
                                 <canvas id="drawing-canvas"></canvas>
                                 <div id="canvas-hint" class="canvas-hint-overlay">
-                                    <div class="canvas-hint-text">泼墨绘符</div>
+                                    <div class="canvas-hint-text" data-i18n="iching.drawHint">泼墨绘符</div>
                                 </div>
                             </div>
                             
@@ -191,13 +194,13 @@
 
                         <!-- 画布操作按钮 -->
                         <div class="talisman-buttons">
-                            <button id="btn-clear" class="talisman-btn-clear">✕ 清除</button>
-                            <button id="btn-confirm-drawing" class="talisman-btn-confirm">✓ 符成</button>
+                            <button id="btn-clear" class="talisman-btn-clear" data-i18n="iching.clear">✕ 清除</button>
+                            <button id="btn-confirm-drawing" class="talisman-btn-confirm" data-i18n="iching.confirm">✓ 符成</button>
                         </div>
                     </div>
 
                     <!-- 4. 底部起卦主按钮 -->
-                    <button id="btn-cast-init" class="btn-main-cast">☯ 起 卦</button>
+                    <button id="btn-cast-init" class="btn-main-cast"><span data-i18n="iching.cast">☯ 起 卦</span><span class="xjg-cost" data-i18n="common.cost">1 积分/次</span></button>
                 </div>
             </div>
         </section>
@@ -207,7 +210,7 @@
             <div class="casting-wrapper">
                 <!-- 左侧：投币器 -->
                 <div class="coins-container">
-                    <div class="hud-title" style="margin-bottom: 10px;">[ 乾坤抛币阵 ]</div>
+                    <div class="hud-title" style="margin-bottom: 10px;" data-i18n="iching.coinTitle">[ 乾坤抛币阵 ]</div>
                     
                     <div class="coins-row">
                         <!-- 硬币 1 -->
@@ -246,15 +249,15 @@
                     </div>
 
                     <div class="cast-count-indicator">
-                        已推演卦象：<span id="cast-count" style="color: var(--neon-blue); font-weight: bold;">0</span> / 6 爻
+                        <span data-i18n="iching.castCount">已推演卦象：</span><span id="cast-count" style="color: var(--neon-blue); font-weight: bold;">0</span> / 6 爻
                     </div>
 
-                    <button id="btn-cast-coin" class="btn-cyber" style="width: 100%; max-width: 320px;">投掷铜钱（寻爻）</button>
+                    <button id="btn-cast-coin" class="btn-cyber" style="width: 100%; max-width: 320px;" data-i18n="iching.castBtn">投掷铜钱（寻爻）</button>
                 </div>
 
                 <!-- 右侧：六爻生成显示器 -->
                 <div class="hexagram-hud">
-                    <div class="hexagram-hud-title">天机爻位</div>
+                    <div class="hexagram-hud-title" data-i18n="iching.yaoTitle">天机爻位</div>
                     <div id="yao-lines" class="yao-lines-list">
                         <!-- 六爻线由下至上生成 -->
                     </div>
@@ -307,7 +310,7 @@
                     </div>
 
                     <div class="console-footer">
-                        <button id="btn-restart" class="btn-secondary">再次占卜 (重置)</button>
+                        <button id="btn-restart" class="btn-secondary" data-i18n="iching.restart">再次占卜 (重置)</button>
                     </div>
                 </div>
             </div>
@@ -318,6 +321,8 @@
     <!-- 顺序加载JS逻辑模块 -->
     <script src="/assets/atmosphere.js"></script>
     <script src="/assets/plain-speak.js"></script>
+    <script src="../assets/auth.js"></script>
+    <script src="../assets/ai-reader.js"></script>
     <script src="iching.js"></script>
     <script src="particles.js"></script>
     <script src="app.js"></script>

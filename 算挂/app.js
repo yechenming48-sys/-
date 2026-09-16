@@ -357,6 +357,10 @@ const audio = new AudioController();
 function renderIChingPlainSpeak(targetEl, context) {
     if (!targetEl) return;
 
+    if (window.AIReader) {
+        window.AIReader.render(targetEl, context);
+        return;
+    }
     if (window.PlainSpeak) {
         window.PlainSpeak.render(targetEl, context);
         return;
@@ -708,8 +712,17 @@ const App = {
         }
     },
 
-    // 确认起卦并切换界面
+    // 确认起卦并切换界面（每次起卦消耗 1 积分）
     startDivinationCasting() {
+        const run = () => this._startDivinationCasting();
+        if (window.XJGAuth && typeof window.XJGAuth.spendPoints === 'function') {
+            window.XJGAuth.spendPoints(1, run);
+        } else {
+            run();
+        }
+    },
+
+    _startDivinationCasting() {
         const questionEl = document.getElementById('input-question');
         const categoryEl = document.getElementById('select-category');
         this.divination.question = questionEl ? questionEl.value.trim() : '';
